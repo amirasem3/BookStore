@@ -12,5 +12,6 @@ public class UserDto
     public string PasswordHash { get; set;}
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    public IEnumerable<BookDto> Books { get; set; }
+    public IEnumerable<Book> Books { get; set; }
+    
 }

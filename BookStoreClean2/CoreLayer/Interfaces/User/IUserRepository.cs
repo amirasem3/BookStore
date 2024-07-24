@@ -10,6 +10,7 @@ public interface IUserRepository
     Task<User> AddUserAsync(User user);
     Task UpdateUserAsync(UpdateUserDto user);
     Task DeleteUserAsync(string id);
-
     Task<User> GetUserByUsernameAsync(string username);
+
+    Task<bool> AddBooksToLibraryAsync(string userId, string bookId);
 }

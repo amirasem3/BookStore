@@ -1,4 +1,6 @@
-﻿namespace BookStoreClean2.CoreLayer.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace BookStoreClean2.CoreLayer.Entities;
 
 public class User
 {
@@ -10,7 +12,10 @@ public class User
     public string PasswordHash { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    
-    public IEnumerable<Book> Books { get; set; }
-    
+
+    public IEnumerable<Book> Books => UserBooks.Select(ub => ub.Book);
+
+
+    public ICollection<UserBook> UserBooks { get; set; } = new List<UserBook>();
+
 }

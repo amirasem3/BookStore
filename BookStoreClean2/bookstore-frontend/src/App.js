@@ -7,12 +7,15 @@ import AddBook from './Book/AddBook';
 import EditBook from './Book/EditBook';
 import DeleteBook from './Book/DeleteBook';
 import DetailBook from "./Book/DetailBook";
-import SearchBooks from "./Book/SearchBooks";
+// import SearchBooks from "./Book/SearchBooks";
 import UserList from "./User/UserList";
 import AddUser from "./User/AddUser";
 import LoginUser from "./User/LoginUser";
 import EditUser from "./User/EditUser";
 import DeleteUser from "./User/DeleteUser";
+import DetailUser  from "./User/DetailUser";
+import MainPage from "./Menu/MainPage";
+import UserBookList from "./User/UserBookList";
 
 const App = () => {
     const [books, setBooks] = useState([]);
@@ -67,9 +70,9 @@ const App = () => {
     const handleUserDeleted = (deletedUserId) => {
         setUsers(prevUsers => prevUsers.filter(user => user.id !== deletedUserId));
     }
-    const handleSearchResults = (searchResults) => {
-        setBooks(searchResults);
-    }
+    // const handleSearchResults = (searchResults) => {
+    //     setBooks(searchResults);
+    // }
 
 
     return (
@@ -78,18 +81,18 @@ const App = () => {
                 <h1>Bookstore</h1>
                 <Routes>
                     <Route path="/" element={<LoginUser/>}/>
-                    <Route path="/bookstore" element={<>
-                        <SearchBooks onSearchResults={handleSearchResults}/>
-                        <UserList users={users}/>
-                        <BookList books={books}/>
-                    </>}/>
-                    <Route path="/bookstore/add" element={<AddBook onBookAdded={handleBookAdded}/>}/>
-                    <Route path="/bookstore/edit/:id" element={<EditBook onBookUpdated={handleBookUpdated}/>}/>
-                    <Route path="/bookstore/delete/:id" element={<DeleteBook onBookDeleted={handleBookDeleted}/>}/>
-                    <Route path="/bookstore/detail/:id" element={<DetailBook/>}/>
-                    <Route path="/bookstore/addUser" element={<AddUser onUserAdded={handleUserAdded}/>}/>
-                    <Route path="/bookstore/editUser/:id" element={<EditUser onUserUpdated={handleUserUpdated}/>}/>
-                    <Route path="/bookstore/deleteUser/:id" element={<DeleteUser onUserDeleted={handleUserDeleted}/>}/>
+                    <Route path="/bookstore" element={<MainPage/>}/>
+                    <Route path="/bookstore/books" element={<BookList booksList={books}/>}/>
+                    <Route path="/bookstore/users" element={<UserList users={users}/> }/>
+                    <Route path="/bookstore/books/add" element={<AddBook onBookAdded={handleBookAdded}/>}/>
+                    <Route path="/bookstore/books/edit/:id" element={<EditBook onBookUpdated={handleBookUpdated}/>}/>
+                    <Route path="/bookstore/books/delete/:id" element={<DeleteBook onBookDeleted={handleBookDeleted}/>}/>
+                    <Route path="/bookstore/books/detail/:id" element={<DetailBook/>}/>
+                    <Route path="/bookstore/users/add" element={<AddUser onUserAdded={handleUserAdded}/>}/>
+                    <Route path="/bookstore/users/edit/:id" element={<EditUser onUserUpdated={handleUserUpdated}/>}/>
+                    <Route path="/bookstore/users/delete/:id" element={<DeleteUser onUserDeleted={handleUserDeleted}/>}/>
+                    <Route path="/bookstore/users/detail/:id" element={<DetailUser/>}/>
+                    <Route path="/bookstore/users/addUserBook/:id" element={<UserBookList booksList={books} onUserLibraryUpdated={handleUserUpdated}/>}/>
                 </Routes>
             </div>
         </Router>

@@ -1,5 +1,6 @@
 ﻿using BookStoreClean.InfrastructureLayer.Data;
 using BookStoreClean2.ApplicationLayer.DTOs.User;
+using BookStoreClean2.ApplicationLayer.DTOs.UserBook;
 using BookStoreClean2.CoreLayer.Entities;
 using BookStoreClean2.CoreLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -78,5 +79,36 @@ public class UserRepository :IUserRepository
     public async Task<User> GetUserByUsernameAsync(string username)
     {
         return await _context.Users.SingleOrDefaultAsync(user => user.Username == username);
+    }
+
+    public async Task<bool> AddBooksToLibraryAsync(string userId, string bookId)
+    {
+        var user = await _context.Users.Include(u => u.UserBooks).FirstOrDefaultAsync(u => u.Id == userId);
+        if (user == null)
+        {
+            return false;
+        }
+
+        var book = await _context.Books.FindAsync(bookId);
+        if (book == null)
+        {
+            return false;
+        }
+        var existingUserBook = _context.UserBooks
+            .FirstOrDefault(ub => ub.UserId == userId && ub.BookId == bookId);
+
+        if (existingUserBook != null)
+        {
+            return false; // Or handle as you wish, e.g., return true if you consider it a success
+        }
+
+        var userBook = new UserBook
+        {
+            UserId = userId,
+            BookId = bookId
+        };
+        _context.UserBooks.Add(userBook);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

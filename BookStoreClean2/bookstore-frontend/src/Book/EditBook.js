@@ -40,7 +40,7 @@ const EditBook = ({ onBookUpdated }) => {
             .then(response => {
                 console.log('Book updated!', response.data);
                 onBookUpdated(response.data);
-                navigate('/bookstore');
+                navigate('/bookstore/books');
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -65,7 +65,7 @@ const EditBook = ({ onBookUpdated }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Update Book</button>
-                <button onClick={() => navigate('/bookstore')}>Cancel</button>
+                <button onClick={() => navigate('/bookstore/books')}>Cancel</button>
             </form>
         </div>
     );

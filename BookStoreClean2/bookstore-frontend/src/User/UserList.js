@@ -1,12 +1,13 @@
 ﻿// src/UserList.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 const UserList = ({ users }) => {
-
+    const navigate = useNavigate();
     return (
         <div>
             <h2>Users List</h2>
-            <Link to={`/bookstore/addUser`}>Add New user</Link>
+            <Link to={`/bookstore/users/add`}>Add New user</Link>
             <table>
                 <thead>
                 <tr>
@@ -21,21 +22,22 @@ const UserList = ({ users }) => {
                 <tbody>
                 {users.map(user => (
                     <tr key={user.id}>
-                        <td><Link to={`/detailUser/${user.id}`}>{user.id}</Link></td>
+                        <td><Link to={`/bookstore/users/detail/${user.id}`}>{user.id}</Link></td>
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
                         <td>{user.username}</td>
                         <td>{user.phoneNumber}</td>
                         <td>{user.email}</td>
                         <td>
-                            <Link to={`/bookstore/editUser/${user.id}`}>Edit</Link>
-                            <Link to={`/bookstore/deleteUser/${user.id}`}>Delete</Link>
+                            <Link to={`/bookstore/users/edit/${user.id}`}>Edit</Link>
+                            <Link to={`/bookstore/users/delete/${user.id}`}>Delete</Link>
 
                         </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
+            <button onClick={() => navigate('/bookstore')}>Back to Main</button>
         </div>
     );
 };

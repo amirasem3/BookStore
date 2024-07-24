@@ -23,7 +23,7 @@ const DeleteUser = ({onUserDeleted}) => {
             .then(() => {
                 console.log('Book deleted!');
                 onUserDeleted(id);
-                navigate('/bookstore');
+                navigate('/bookstore/users');
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -54,7 +54,7 @@ const DeleteUser = ({onUserDeleted}) => {
                 <strong>Phone Number</strong> {user.phoneNumber}
             </div>
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate('/bookstore')}>No</button>
+            <button onClick={() => navigate('/bookstore/users')}>No</button>
         </div>
     );
 };

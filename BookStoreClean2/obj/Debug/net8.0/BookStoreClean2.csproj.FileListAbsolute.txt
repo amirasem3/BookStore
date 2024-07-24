@@ -138,3 +138,4 @@ E:\BookStoreClean2\BookStoreClean2\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagg
 E:\BookStoreClean2\BookStoreClean2\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\BookStoreClean2\BookStoreClean2\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 E:\BookStoreClean2\BookStoreClean2\obj\Debug\net8.0\BookStoreClean2.MvcApplicationPartsAssemblyInfo.cs
+E:\BookStoreClean2\BookStoreClean2\obj\Debug\net8.0\BookStoreClean2.sourcelink.json

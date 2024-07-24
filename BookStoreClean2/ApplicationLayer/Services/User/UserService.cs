@@ -2,6 +2,7 @@
 using BookStoreClean2.ApplicationLayer.Interfaces.User;
 using BookStoreClean2.CoreLayer.Entities;
 using BookStoreClean2.CoreLayer.Interfaces;
+using BookStoreClean2.CoreLayer.Interfaces.UserBook;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +12,13 @@ public class UserService : IUserService
 {
     public required IPasswordHasher<CoreLayer.Entities.User> _passwordHasher;
     public required IUserRepository _userRepository;
+    public required IUserBookRepository _userBookRepository;
 
-    public UserService(IPasswordHasher<CoreLayer.Entities.User> passwordHasher, IUserRepository userRepository)
+    public UserService(IPasswordHasher<CoreLayer.Entities.User> passwordHasher, IUserRepository userRepository, IUserBookRepository userBookRepository)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
+        _userBookRepository = userBookRepository;
     }
 
     public async Task<UserDto> GetUserByIdAsync(string id)
@@ -28,7 +31,9 @@ public class UserService : IUserService
             LastName = user.LastName,
             Username = user.Username,
             PhoneNumber = user.PhoneNumber,
-            Email = user.Email
+            Email = user.Email,
+            PasswordHash = user.PasswordHash,
+            
         };
     }
 
@@ -42,7 +47,8 @@ public class UserService : IUserService
             LastName = user.LastName,
             Username = user.Username,
             PhoneNumber = user.PhoneNumber,
-            Email = user.Email
+            Email = user.Email,
+            PasswordHash = user.PasswordHash,
         });
     }
 
@@ -140,5 +146,10 @@ public class UserService : IUserService
             Email = user.Email,
             PhoneNumber = user.PhoneNumber
         };
+    }
+
+    public async Task<bool> AddBookToUserLibraryAsync(string userId, string bookId)
+    {
+        return await _userRepository.AddBooksToLibraryAsync(userId, bookId);
     }
 }

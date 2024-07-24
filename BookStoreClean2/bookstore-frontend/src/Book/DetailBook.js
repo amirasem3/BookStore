@@ -25,9 +25,9 @@ const DetailBook = () => {
     return (
         <div>
             <h2>{book.title}</h2>
-            <di>
+            <div>
                 <strong>ID:</strong> {book.id}
-            </di>
+            </div>
             <div>
                 <strong>Title:</strong> {book.title}
             </div>
@@ -37,7 +37,8 @@ const DetailBook = () => {
             <div>
                 <strong>Price:</strong> {book.price}
             </div>
-            <button onClick={()=> navigate('/bookstore')}>Back to list</button>
+            
+            <button onClick={()=> navigate('/bookstore/books')}>Back to list</button>
         </div>
     );
 };

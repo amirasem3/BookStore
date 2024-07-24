@@ -12,4 +12,6 @@ public interface IUserService
     Task<UserDto> AuthenticateUserAsync(string username, string password);
 
     Task<UserDto> GetUserByUsernameAsync(string username);
+
+    Task<bool> AddBookToUserLibraryAsync(string userId, string bookId);
 }

@@ -48,7 +48,7 @@ const EditUser = ({ onUserUpdated }) => {
             .then(response => {
                 console.log('user updated!', response.data);
                 onUserUpdated(response.data);
-                navigate('/bookstore');
+                navigate('/bookstore/users');
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -80,8 +80,9 @@ const EditUser = ({ onUserUpdated }) => {
                     <label>Phone Number</label>
                     <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required/>
                 </div>
+                <button onClick={() => navigate(`/bookstore/users/addUserBook/${id}`)}>Add Books</button>
                 <button type="submit">Update User</button>
-                <button onClick={() => navigate('/bookstore')}>Cancel</button>
+                <button onClick={() => navigate('/bookstore/users')}>Cancel</button>
             </form>
         </div>
     );

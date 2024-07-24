@@ -25,7 +25,7 @@ const AddBook = ({ onBookAdded }) => {
                 setTitle('');
                 setAuthor('');
                 setPrice('');
-                navigate('/bookstore');
+                navigate('/bookstore/books');
             })
             .catch(error => {
                 console.error('There was an error adding the book!', error);
@@ -49,7 +49,7 @@ const AddBook = ({ onBookAdded }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Add Book</button>
-                <button onClick={() => navigate('/bookstore')}>Cancel</button>
+                <button onClick={() => navigate('/bookstore/books')}>Cancel</button>
             </form>
         </div>
     );

@@ -21,6 +21,7 @@ const AddUser = ({ onUserAdded }) => {
             username,
             email,
             phoneNumber,
+            password
         };
 
         axios.post('https://localhost:7051/api/users/RegisterUser', newBook)
@@ -33,7 +34,7 @@ const AddUser = ({ onUserAdded }) => {
                 setEmail('');
                 setPhoneNumber('');
                 setPassword('');
-                navigate('/');
+                navigate('/bookstore/users');
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);
@@ -69,7 +70,7 @@ const AddUser = ({ onUserAdded }) => {
                     <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required/>
                 </div>
                 <button type="submit">Register</button>
-                <button onClick={() => navigate('/')}>Cancel</button>
+                <button onClick={() => navigate('/bookstore/users')}>Cancel</button>
             </form>
         </div>
     );
