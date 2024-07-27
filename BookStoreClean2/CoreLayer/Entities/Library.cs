@@ -1,6 +1,6 @@
 ﻿namespace BookStoreClean2.CoreLayer.Entities;
 
-public class UserBook
+public class Library
 {
     public string UserId { get; set; }
     public User User { get; set; }

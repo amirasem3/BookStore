@@ -3,6 +3,7 @@ using BookStoreClean.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreClean2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240724123554_ChagenBookArrayType")]
+    partial class ChagenBookArrayType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,21 +44,6 @@ namespace BookStoreClean2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.Library", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BookId")
-                        .HasColumnType("nvarchar(24)");
-
-                    b.HasKey("UserId", "BookId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("UserBooks");
                 });
 
             modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.User", b =>
@@ -95,7 +83,22 @@ namespace BookStoreClean2.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.Library", b =>
+            modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.UserBook", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BookId")
+                        .HasColumnType("nvarchar(24)");
+
+                    b.HasKey("UserId", "BookId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("UserBooks");
+                });
+
+            modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.UserBook", b =>
                 {
                     b.HasOne("BookStoreClean2.CoreLayer.Entities.Book", "Book")
                         .WithMany("UserBooks")

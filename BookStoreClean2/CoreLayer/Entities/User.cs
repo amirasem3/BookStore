@@ -13,9 +13,9 @@ public class User
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
 
-    public IEnumerable<Book> Books => UserBooks.Select(ub => ub.Book);
+    public ICollection<Book> Books = new List<Book>();
 
 
-    public ICollection<UserBook> UserBooks { get; set; } = new List<UserBook>();
+    public ICollection<Library> UserBooks { get; set; } = new List<Library>();
 
 }

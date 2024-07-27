@@ -13,4 +13,5 @@ public interface IUserRepository
     Task<User> GetUserByUsernameAsync(string username);
 
     Task<bool> AddBooksToLibraryAsync(string userId, string bookId);
+    
 }

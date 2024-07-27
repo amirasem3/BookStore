@@ -1,7 +1,7 @@
 ﻿// src/User/EditUser.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import {useParams, useNavigate, Link} from 'react-router-dom';
 
 const EditUser = ({ onUserUpdated }) => {
     const { id } = useParams();
@@ -12,6 +12,8 @@ const EditUser = ({ onUserUpdated }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [userBooks, setUserBooks] = useState([]);
 
     useEffect(() => {
         axios.get(`https://localhost:7051/api/users/GetUserById/${id}`)
@@ -22,6 +24,8 @@ const EditUser = ({ onUserUpdated }) => {
                 setEmail(user.email);
                 setUsername(user.username);
                 setPhoneNumber(user.phoneNumber);
+                setUserBooks(user.books);
+                
               
             })
             .catch(error => {
@@ -44,7 +48,7 @@ const EditUser = ({ onUserUpdated }) => {
            
         };
 
-        axios.put(`https://localhost:7051/api/users/UpdateUser/${id}`, updatedUser)
+        axios.put(`https://localhost:7051/api/users/UpdateUser`, updatedUser)
             .then(response => {
                 console.log('user updated!', response.data);
                 onUserUpdated(response.data);
@@ -58,7 +62,7 @@ const EditUser = ({ onUserUpdated }) => {
 
     return (
         <div>
-            <h2>Edit Book</h2>
+            <h2>Edit User</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>First Name</label>
@@ -79,6 +83,31 @@ const EditUser = ({ onUserUpdated }) => {
                 <div>
                     <label>Phone Number</label>
                     <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required/>
+                </div>
+                <div>
+                    <h2>{firstName} {lastName}'s Library</h2>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {userBooks.map(book => (
+                            <tr key={book.id}>
+                                <td>{book.id}</td>
+                                <td>{book.title}</td>
+                                <td>{book.author}</td>
+                                <td>{book.price}</td>
+                               <td><Link to={`/bookstore/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove From the Library</Link></td> 
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
                 <button onClick={() => navigate(`/bookstore/users/addUserBook/${id}`)}>Add Books</button>
                 <button type="submit">Update User</button>

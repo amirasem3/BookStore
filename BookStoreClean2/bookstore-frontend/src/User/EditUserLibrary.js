@@ -1,15 +1,18 @@
-﻿// srd/User/DeleteUser.js
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
-const DeleteUser = ({onUserDeleted}) => {
+const EditUserLibrary = ({onUserDeleted}) => {
+    const location = useLocation();
     const { id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const params = new URLSearchParams(location.search);
+    const bookId = params.get('BOOK_ID');
+    const userId = params.get('USER_ID');
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/users/GetUserById/${id}`)
+        axios.get(`https://localhost:7051/api/books/GetBookById/${bookId}`)
             .then(response => {
                 setUser(response.data);
             })
@@ -19,10 +22,16 @@ const DeleteUser = ({onUserDeleted}) => {
     }, [id]);
 
     const handleDelete = () => {
-        axios.delete(`https://localhost:7051/api/users/RemoveUser?id=${id}`)
+        // event.preventDefault();
+        const deletePayload = {
+            userId: userId,
+            bookId:bookId
+        };
+
+       
+        axios.delete(`https://localhost:7051/api/Library/RemoveBookFromLibrary?UserId=${userId}&BookId=${bookId}`)
             .then(() => {
                 console.log('Book deleted!');
-                onUserDeleted(id);
                 navigate('/bookstore/users');
             })
             .catch(error => {
@@ -35,28 +44,23 @@ const DeleteUser = ({onUserDeleted}) => {
 
     return (
         <div>
-            <h2>Remove User</h2>
-            <p>Are you sure you want to delete the following User?</p>
+            <h2>Remove Book</h2>
+            <p>Are you sure you want to delete the following book from the library?</p>
 
             <div>
-                <strong>First Name:</strong> {user.firstName}
+                <strong>Title:</strong> {user.title}
             </div>
             <div>
-                <strong>Last Name:</strong> {user.lastName}
+                <strong>Author:</strong> {user.author}
             </div>
             <div>
-                <strong>Username</strong> {user.username}
+                <strong>Price : </strong> {user.price}
             </div>
-            <div>
-                <strong>Email</strong> {user.email}
-            </div>
-            <div>
-                <strong>Phone Number</strong> {user.phoneNumber}
-            </div>
+           
             <button onClick={() => handleDelete()}>Yes</button>
             <button onClick={() => navigate('/bookstore/users')}>No</button>
         </div>
     );
 };
 
-export default DeleteUser;
+export default EditUserLibrary;

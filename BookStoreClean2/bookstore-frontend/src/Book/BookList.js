@@ -39,7 +39,7 @@ const BookList = ({booksList}) => {
                 </tr>
                 </thead>
                 <tbody>
-                {booksList.map(book => (
+                {books.map(book => (
                     <tr key={book.id}>
                         <td>{book.id}</td>
                         <td><Link to={`/bookstore/books/detail/${book.id}`}>{book.title}</Link></td>

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\BookStoreClean2\\BookStoreClean2\\BookStoreClean2.csproj": {}
+    "C:\\Projects\\BookStore\\BookStoreClean2\\BookStoreClean2.csproj": {}
   },
   "projects": {
-    "E:\\BookStoreClean2\\BookStoreClean2\\BookStoreClean2.csproj": {
+    "C:\\Projects\\BookStore\\BookStoreClean2\\BookStoreClean2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\BookStoreClean2\\BookStoreClean2\\BookStoreClean2.csproj",
+        "projectUniqueName": "C:\\Projects\\BookStore\\BookStoreClean2\\BookStoreClean2.csproj",
         "projectName": "BookStoreClean2",
-        "projectPath": "E:\\BookStoreClean2\\BookStoreClean2\\BookStoreClean2.csproj",
-        "packagesPath": "C:\\Users\\hesabras8\\.nuget\\packages\\",
-        "outputPath": "E:\\BookStoreClean2\\BookStoreClean2\\obj\\",
+        "projectPath": "C:\\Projects\\BookStore\\BookStoreClean2\\BookStoreClean2.csproj",
+        "packagesPath": "C:\\Users\\AH.Yousefi\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\BookStore\\BookStoreClean2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hesabras8\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\AH.Yousefi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -80,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\AH.Yousefi\\.dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

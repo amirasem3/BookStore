@@ -25,9 +25,9 @@ const DetailUser = () => {
     return (
         <div>
             <h2>{user.firstName} {user.lastName}</h2>
-            <di>
+            <div>
                 <strong>ID:</strong> {user.id}
-            </di>
+            </div>
             <div>
                 <strong>First Name:</strong> {user.firstName}
             </div>
@@ -46,7 +46,31 @@ const DetailUser = () => {
             <div>
                 <strong>Password Hash:</strong> {user.passwordHash}
             </div>
-            <button onClick={()=> navigate('/bookstore/users')}>Back to list</button>
+            <div>
+                <h2>Books of {user.firstName} {user.lastName}</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {user.books.map(book => (
+                        <tr key={book.id}>
+                            <td>{book.id}</td>
+                            <td>{book.title}</td>
+                            <td>{book.author}</td>
+                            <td>{book.price}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+
+            <button onClick={() => navigate('/bookstore/users')}>Back to list</button>
         </div>
     );
 };

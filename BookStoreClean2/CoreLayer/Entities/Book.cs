@@ -10,7 +10,7 @@ public class Book
     public decimal Price { get; set; }
     
     // [JsonIgnore]
-    public ICollection<UserBook> UserBooks { get; set; } = new List<UserBook>();
+    public ICollection<Library> UserBooks { get; set; } = new List<Library>();
 
     public Book()
     {

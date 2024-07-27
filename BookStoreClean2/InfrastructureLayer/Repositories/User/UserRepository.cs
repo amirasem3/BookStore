@@ -94,21 +94,25 @@ public class UserRepository :IUserRepository
         {
             return false;
         }
-        var existingUserBook = _context.UserBooks
-            .FirstOrDefault(ub => ub.UserId == userId && ub.BookId == bookId);
+        var existingUserBook = await _context.UserBooks
+            .FirstOrDefaultAsync(ub => ub.UserId == userId && ub.BookId == bookId);
 
         if (existingUserBook != null)
         {
             return false; // Or handle as you wish, e.g., return true if you consider it a success
         }
 
-        var userBook = new UserBook
+        var userBook = new Library
         {
             UserId = userId,
-            BookId = bookId
+            BookId = bookId,
+            Book = book,
         };
         _context.UserBooks.Add(userBook);
+       user.Books.Add(userBook.Book);
         await _context.SaveChangesAsync();
+        Console.WriteLine($"Returning user {user.Id} with {user.Books.ToList()} books.");
         return true;
     }
+    
 }

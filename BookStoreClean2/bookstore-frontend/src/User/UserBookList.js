@@ -19,11 +19,11 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
             bookId:bookId
         };
 
-        axios.put(`https://localhost:7051/api/users/AddBookToUserLibrary`, addedBook)
+        axios.put(`https://localhost:7051/api/Library/AddBookToLibrary`, addedBook)
             .then(response => {
                 console.log('User library updated!', response.data);
                 onUserLibraryUpdated(response.data);
-                navigate('/bookstore/users');
+                navigate(`/bookstore/users/edit/${id}`);
             })
             .catch(error => {
                 console.error('There was an error updating the user library!', error);
@@ -46,7 +46,7 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
                 </tr>
                 </thead>
                 <tbody>
-                {booksList.map(book => (
+                {books.map(book => (
                     <tr key={book.id}>
                         <td>
                             <button onClick={() => handleAddBook(book.id)}>Add</button>

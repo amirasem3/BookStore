@@ -16,6 +16,7 @@ import DeleteUser from "./User/DeleteUser";
 import DetailUser  from "./User/DetailUser";
 import MainPage from "./Menu/MainPage";
 import UserBookList from "./User/UserBookList";
+import EditUserLibrary from "./User/EditUserLibrary";
 
 const App = () => {
     const [books, setBooks] = useState([]);
@@ -93,6 +94,7 @@ const App = () => {
                     <Route path="/bookstore/users/delete/:id" element={<DeleteUser onUserDeleted={handleUserDeleted}/>}/>
                     <Route path="/bookstore/users/detail/:id" element={<DetailUser/>}/>
                     <Route path="/bookstore/users/addUserBook/:id" element={<UserBookList booksList={books} onUserLibraryUpdated={handleUserUpdated}/>}/>
+                    <Route path="/bookstore/users/library/remove" element={<EditUserLibrary/>}/>
                 </Routes>
             </div>
         </Router>

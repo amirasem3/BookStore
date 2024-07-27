@@ -1,4 +1,6 @@
-﻿using BookStoreClean2.ApplicationLayer.DTOs.User;
+﻿using System.Collections;
+using BookStoreClean2.ApplicationLayer.DTOs;
+using BookStoreClean2.ApplicationLayer.DTOs.User;
 using BookStoreClean2.ApplicationLayer.Interfaces.User;
 using BookStoreClean2.CoreLayer.Entities;
 using BookStoreClean2.CoreLayer.Interfaces;
@@ -12,19 +14,22 @@ public class UserService : IUserService
 {
     public required IPasswordHasher<CoreLayer.Entities.User> _passwordHasher;
     public required IUserRepository _userRepository;
-    public required IUserBookRepository _userBookRepository;
+    public required ILibraryRepository _libraryRepository;
+    public required IBookRepository _bookRepository;
 
-    public UserService(IPasswordHasher<CoreLayer.Entities.User> passwordHasher, IUserRepository userRepository, IUserBookRepository userBookRepository)
+    public UserService(IPasswordHasher<CoreLayer.Entities.User> passwordHasher, IUserRepository userRepository, ILibraryRepository libraryRepository, IBookRepository bookRepository)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
-        _userBookRepository = userBookRepository;
+        _bookRepository = bookRepository;
+        _libraryRepository = libraryRepository;
     }
 
     public async Task<UserDto> GetUserByIdAsync(string id)
     {
         var user = await _userRepository.GetUserByIdAsync(id);
-        return new UserDto
+        var books = await _libraryRepository.GetBooksByUserIdAsync(id);
+        var userDto = new UserDto
         {
             Id = user.Id,
             FirstName = user.FirstName,
@@ -33,23 +38,51 @@ public class UserService : IUserService
             PhoneNumber = user.PhoneNumber,
             Email = user.Email,
             PasswordHash = user.PasswordHash,
-            
+            Books = books.Select(book => new BookDto
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author,
+                Price = book.Price
+
+            }).ToList()
         };
+        Console.WriteLine($"Returning user {id} with {userDto.Books.Count} books.");
+        // Console.WriteLine($"Returning user {id} first book is {userDto.Books.First().Id}");
+        return userDto;
     }
 
     public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
     {
+       var allUsers = new List<UserDto>();
         var users = await _userRepository.GetAllUsersAsync();
-        return users.Select(user => new UserDto
+        foreach (var user in users)
         {
-            Id = user.Id,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            Username = user.Username,
-            PhoneNumber = user.PhoneNumber,
-            Email = user.Email,
-            PasswordHash = user.PasswordHash,
-        });
+            var userBooks = await _libraryRepository.GetBooksByUserIdAsync(user.Id);
+            var userDto  = new UserDto
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Username = user.Username,
+                PhoneNumber = user.PhoneNumber,
+                PasswordHash = user.PasswordHash,
+                Email = user.Email,
+                Books = userBooks.Select(book => new BookDto
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Price = book.Price
+                }).ToList()
+            };
+            allUsers.Add(userDto);
+            Console.WriteLine($"Returning user {user.Id} with {userDto.Books.Count} books.");
+
+
+        }
+
+        return allUsers;
     }
 
     public async Task<UserDto> CreateUserAsync(RegisterUserDto registerUserDto)
@@ -80,6 +113,7 @@ public class UserService : IUserService
     public async Task<UpdateUserDto> UpdateUserAsync(string id, UpdateUserDto updateUserDto)
     {
         var user = await _userRepository.GetUserByIdAsync(id);
+       
         if (user == null)
         {
             return null;
@@ -148,8 +182,5 @@ public class UserService : IUserService
         };
     }
 
-    public async Task<bool> AddBookToUserLibraryAsync(string userId, string bookId)
-    {
-        return await _userRepository.AddBooksToLibraryAsync(userId, bookId);
-    }
+    
 }

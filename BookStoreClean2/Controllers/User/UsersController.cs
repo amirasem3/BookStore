@@ -14,12 +14,12 @@ namespace BookStoreClean2.Controllers.User;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
-    private readonly IUserBookService _userBookService;
+    private readonly ILibraryService _libraryService;
 
-    public UsersController(IUserService userService, IUserBookService userBookService)
+    public UsersController(IUserService userService, ILibraryService libraryService)
     {
         _userService = userService;
-        _userBookService = userBookService;
+        _libraryService = libraryService;
     }
     [HttpGet("GetUserById/{id}")]
     public async Task<IActionResult> GetUser(string id)
@@ -29,7 +29,12 @@ public class UsersController : ControllerBase
         {
             return NotFound();
         }
+        
+        // Console.WriteLine($"Returning {user.Books.First().Id} users.");
+
         return Ok(user);
+        
+        
     }
     
     [HttpGet("GetUserByUsername/{title}")]
@@ -63,15 +68,17 @@ public class UsersController : ControllerBase
         var createdUser = await _userService.CreateUserAsync(registerUserDto);
         return CreatedAtAction(nameof(GetUser), new { id =createdUser.Id }, createdUser);
     }
-    [HttpPut("UpdateUser/{id}")]
-    public async Task<IActionResult> UpdateBookAsync(string id, [FromBody] UpdateUserDto userDto)
+    [HttpPut("UpdateUser")]
+    public async Task<IActionResult> UpdateBookAsync([FromBody] UpdateUserDto userDto)
     {
+
+        var userId = userDto.Id;
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-
-        var updatedUser = await _userService.UpdateUserAsync(id, userDto);
+        
+        var updatedUser = await _userService.UpdateUserAsync(userId, userDto);
         if (updatedUser == null)
         {
             return NotFound();
@@ -80,20 +87,19 @@ public class UsersController : ControllerBase
         return Ok(updatedUser);
     }
 
-    [HttpPut("AddBookToUserLibrary")]
-    public async Task<IActionResult> AddBookToUserLibrary(UserBookAddDto userBook)
-    {
-      // var addedUserBook  =   await _userBookService.AddUserBookAsync(userBook);
-      var bookAddedToUser = await _userService.AddBookToUserLibraryAsync(userBook.UserId, userBook.BookId);
-      // var bookadded = await _userBookService.AddBookToUserLibraryAsync(userBook.UserId);
-      if (userBook == null || !bookAddedToUser)
-      {
-          return NotFound("Your Book or User does Not Exist");
-      }
-
-      return Ok(bookAddedToUser);
-    }
-    [HttpDelete("RemoveUser/{id}")]
+    // [HttpPut("AddBookToUserLibrary")]
+    // public async Task<IActionResult> AddBookToUserLibrary(LibraryAddDto library)
+    // {
+    //     var result = await _libraryService.AddLibraryRecordAsync(library.UserId, library.BookId);
+    //
+    //   if (!result)
+    //   {
+    //       return NotFound("Your Book or User does Not Exist");
+    //   }
+    //
+    //   return Ok($"The book successfully ({library.BookId}) added to user ({library.UserId}) library.");
+    // }
+    [HttpDelete("RemoveUser")]
     public async Task<IActionResult> RemoveUser(string id)
     {
         var deleted = await _userService.DeleteUserAsync(id);
