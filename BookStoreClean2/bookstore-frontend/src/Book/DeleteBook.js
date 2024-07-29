@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const DeleteBook = ({onBookDeleted}) => {
     const { id } = useParams();
+    const {role} = useParams();
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
 
@@ -23,7 +24,7 @@ const DeleteBook = ({onBookDeleted}) => {
             .then(() => {
                 console.log('Book deleted!');
                 onBookDeleted(id);
-                navigate('/bookstore/books');
+                navigate(`/bookstore/${role}/books`);
             })
             .catch(error => {
                 console.error('There was an error deleting the book!', error);
@@ -48,7 +49,7 @@ const DeleteBook = ({onBookDeleted}) => {
                     <strong>Price:</strong> {book.price}
                 </div>
                 <button onClick={()=> handleDelete()}>Yes</button>
-                <button onClick={()=> navigate('/bookstore/books')}>No</button>
+                <button onClick={()=> navigate(`/bookstore/${role}/books`)}>No</button>
         </div>
     );
 };

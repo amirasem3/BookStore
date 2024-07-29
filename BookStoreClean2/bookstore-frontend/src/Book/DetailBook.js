@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const DetailBook = () => {
     const { id } = useParams();
+    const {role} = useParams();
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
 
@@ -38,7 +39,7 @@ const DetailBook = () => {
                 <strong>Price:</strong> {book.price}
             </div>
             
-            <button onClick={()=> navigate('/bookstore/books')}>Back to list</button>
+            <button onClick={()=> navigate(`/bookstore/${role}/books`)}>Back to list</button>
         </div>
     );
 };

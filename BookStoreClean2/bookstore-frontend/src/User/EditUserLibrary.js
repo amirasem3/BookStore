@@ -5,6 +5,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 const EditUserLibrary = ({onUserDeleted}) => {
     const location = useLocation();
     const { id } = useParams();
+    const {role} = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const params = new URLSearchParams(location.search);
@@ -32,7 +33,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
         axios.delete(`https://localhost:7051/api/Library/RemoveBookFromLibrary?UserId=${userId}&BookId=${bookId}`)
             .then(() => {
                 console.log('Book deleted!');
-                navigate('/bookstore/users');
+                navigate(`/bookstore/${role}/users/edit/${userId}`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -58,7 +59,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
             </div>
            
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate('/bookstore/users')}>No</button>
+            <button onClick={() => navigate(`/bookstore/${role}/users/edit/${userId}`)}>No</button>
         </div>
     );
 };

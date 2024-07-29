@@ -1,4 +1,6 @@
-﻿namespace BookStoreClean2.ApplicationLayer.DTOs.User;
+﻿using BookStoreClean2.CoreLayer.Entities;
+
+namespace BookStoreClean2.ApplicationLayer.DTOs.User;
 
 public class UpdateUserDto
 {
@@ -10,6 +12,7 @@ public class UpdateUserDto
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
 
+    public string RoleName { get; set; }
     // public ICollection<BookDto> Books { get; set; }
     
     

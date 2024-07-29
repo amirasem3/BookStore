@@ -6,6 +6,8 @@ import {useNavigate} from "react-router-dom";
 const LoginUser = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [roleName, setRoleName] = useState('');
+    const [user, setUser] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -22,7 +24,15 @@ const LoginUser = () => {
                 console.log('User Logged In!', user.username);
                 setUsername(user.username);
                 setPassword(user.password);
-                navigate('/bookstore');
+                setRoleName(user.roleName);
+                setUser(user);
+                if (user.roleName.includes("Admin")){
+                    navigate(`/bookstore/${user.roleName}`);    
+                }
+                else {
+
+                    navigate(`/bookstore/${user.roleName}`);
+                }
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);

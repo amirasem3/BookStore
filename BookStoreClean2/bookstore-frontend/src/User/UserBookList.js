@@ -8,6 +8,7 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate();
     const { id } = useParams();
+    const {role} = useParams();
 
     const handleSearchResults = (searchResults) => {
         setBooks(searchResults);
@@ -23,7 +24,7 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
             .then(response => {
                 console.log('User library updated!', response.data);
                 onUserLibraryUpdated(response.data);
-                navigate(`/bookstore/users/edit/${id}`);
+                navigate(`/bookstore/${role}/users/edit/${id}`);
             })
             .catch(error => {
                 console.error('There was an error updating the user library!', error);
@@ -52,14 +53,14 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
                             <button onClick={() => handleAddBook(book.id)}>Add</button>
                         </td>
                         <td>{book.id}</td>
-                        <td><Link to={`/bookstore/books/detail/${book.id}`}>{book.title}</Link></td>
+                        <td><Link to={`/bookstore/${role}/books/detail/${book.id}`}>{book.title}</Link></td>
                         <td>{book.author}</td>
                         <td>{book.price}</td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-            <button onClick={() => navigate('/bookstore')}>Back to Main</button>
+            <button onClick={() => navigate(`/bookstore/${role}`)}>Back to Main</button>
         </div>
     );
 };

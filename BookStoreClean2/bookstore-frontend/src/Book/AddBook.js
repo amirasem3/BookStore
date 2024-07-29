@@ -1,13 +1,14 @@
 // src/AddBook.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const AddBook = ({ onBookAdded }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [price, setPrice] = useState('');
     const navigate = useNavigate();
+    const {role} = useParams();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,7 +26,7 @@ const AddBook = ({ onBookAdded }) => {
                 setTitle('');
                 setAuthor('');
                 setPrice('');
-                navigate('/bookstore/books');
+                navigate(`/bookstore/${role}/books`);
             })
             .catch(error => {
                 console.error('There was an error adding the book!', error);
@@ -49,7 +50,7 @@ const AddBook = ({ onBookAdded }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Add Book</button>
-                <button onClick={() => navigate('/bookstore/books')}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/books`)}>Cancel</button>
             </form>
         </div>
     );

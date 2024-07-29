@@ -1,15 +1,17 @@
 ﻿// src/User/EditUser.js
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useParams, useNavigate, Link} from 'react-router-dom';
 
-const EditUser = ({ onUserUpdated }) => {
-    const { id } = useParams();
+const EditUser = ({onUserUpdated}) => {
+    const {id} = useParams();
+    const {role} = useParams();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [roleName, setRoleName] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -24,9 +26,10 @@ const EditUser = ({ onUserUpdated }) => {
                 setEmail(user.email);
                 setUsername(user.username);
                 setPhoneNumber(user.phoneNumber);
+                setRoleName(user.roleName)
                 setUserBooks(user.books);
-                
-              
+
+
             })
             .catch(error => {
                 console.error('There was an error fetching the book!', error);
@@ -44,15 +47,16 @@ const EditUser = ({ onUserUpdated }) => {
             lastName,
             username,
             email,
-            phoneNumber
-           
+            phoneNumber,
+            roleName
+
         };
 
         axios.put(`https://localhost:7051/api/users/UpdateUser`, updatedUser)
             .then(response => {
                 console.log('user updated!', response.data);
                 onUserUpdated(response.data);
-                navigate('/bookstore/users');
+                navigate(`/bookstore/${role}/users`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -84,6 +88,11 @@ const EditUser = ({ onUserUpdated }) => {
                     <label>Phone Number</label>
                     <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required/>
                 </div>
+                
+                <div>
+                    <label>Role</label>
+                    <input type="text" value={roleName} onChange={(e => setRoleName(e.target.value))} required/>
+                </div>
                 <div>
                     <h2>{firstName} {lastName}'s Library</h2>
                     <table>
@@ -103,15 +112,16 @@ const EditUser = ({ onUserUpdated }) => {
                                 <td>{book.title}</td>
                                 <td>{book.author}</td>
                                 <td>{book.price}</td>
-                               <td><Link to={`/bookstore/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove From the Library</Link></td> 
+                                <td><Link to={`/bookstore/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
+                                    From the Library</Link></td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 </div>
-                <button onClick={() => navigate(`/bookstore/users/addUserBook/${id}`)}>Add Books</button>
+                <button onClick={() => navigate(`/bookstore/${roleName}/users/addUserBook/${id}`)}>Add Books</button>
                 <button type="submit">Update User</button>
-                <button onClick={() => navigate('/bookstore/users')}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${roleName}/users`)}>Cancel</button>
             </form>
         </div>
     );

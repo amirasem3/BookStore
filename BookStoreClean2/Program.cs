@@ -3,13 +3,17 @@ using BookStoreClean.ApplicationLayer.Interfaces;
 using BookStoreClean.ApplicationLayer.Services;
 using BookStoreClean.InfrastructureLayer.Data;
 using BookStoreClean.InfrastructureLayer.Repositories;
+using BookStoreClean2.ApplicationLayer.Interfaces.Role;
 using BookStoreClean2.ApplicationLayer.Interfaces.User;
 using BookStoreClean2.ApplicationLayer.Interfaces.UserBook;
+using BookStoreClean2.ApplicationLayer.Services.Role;
 using BookStoreClean2.ApplicationLayer.Services.User;
 using BookStoreClean2.ApplicationLayer.Services.UserBook;
 using BookStoreClean2.CoreLayer.Entities;
 using BookStoreClean2.CoreLayer.Interfaces;
+using BookStoreClean2.CoreLayer.Interfaces.Role;
 using BookStoreClean2.CoreLayer.Interfaces.UserBook;
+using BookStoreClean2.InfrastructureLayer.Repositories.Role;
 using BookStoreClean2.InfrastructureLayer.Repositories.UserBook;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +58,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
 builder.Services.AddScoped<ILibraryService, LibraryService>();
+builder.Services.AddScoped<IRoleService,RoleService>();
+builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 var app = builder.Build();
 
 

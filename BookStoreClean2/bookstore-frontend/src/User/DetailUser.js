@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const DetailUser = () => {
     const { id } = useParams();
+    const {role} = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
@@ -70,7 +71,7 @@ const DetailUser = () => {
                 </table>
             </div>
 
-            <button onClick={() => navigate('/bookstore/users')}>Back to list</button>
+            <button onClick={() => navigate(`/bookstore/${role}/users`)}>Back to list</button>
         </div>
     );
 };

@@ -14,13 +14,20 @@ import LoginUser from "./User/LoginUser";
 import EditUser from "./User/EditUser";
 import DeleteUser from "./User/DeleteUser";
 import DetailUser  from "./User/DetailUser";
-import MainPage from "./Menu/MainPage";
+import MainPageAdmin from "./Menu/MainPageAdmin";
 import UserBookList from "./User/UserBookList";
 import EditUserLibrary from "./User/EditUserLibrary";
+import RoleList from "./Role/RoleList";
+import AddRole from "./Role/AddRole";
+import DeleteRole from "./Role/DeleteRole";
+import RoleDetail from "./Role/RoleDetail";
+import RoleEdit from "./Role/RoleEdit";
+import MainPageUser from "./Menu/MainPageUser";
 
 const App = () => {
     const [books, setBooks] = useState([]);
     const [users, setUsers] = useState([]);
+    const [roles, setRoles]  = useState([]);
 
     useEffect(() => {
         fetchBooks();
@@ -30,6 +37,9 @@ const App = () => {
         fetchUsers();
     }, []);
 
+    useEffect(() => {
+        fetchRoles();
+    }, []);
     const fetchBooks = () => {
         axios.get('https://localhost:7051/api/books/AllBooks')
             .then(response => {
@@ -50,6 +60,17 @@ const App = () => {
                 console.error('There was an error fetching the books!', error);
             });
     };
+    
+    const fetchRoles = () =>{
+        axios.get('https://localhost:7051/api/Role/GetAllRoles')
+            .then(response =>{
+                console.log('Roles Fetched:', response.data);
+                setRoles(response.data);
+            })
+            .catch(error =>{
+                console.error('There was an error in fetching the Roles!', error);
+            })
+    }
 
     const handleBookAdded = (newBook) => {
         setBooks(prevBooks => [...prevBooks, newBook]);
@@ -58,11 +79,18 @@ const App = () => {
     const handleUserAdded = (newUser) => {
         setUsers(prevUsers => [...prevUsers, newUser]);
     }
+    
+    const handleRoleAdded = (newRole) => {
+        setRoles(prevRoles => [...prevRoles, newRole]);
+    }
     const handleBookUpdated = (updatedBook) => {
         setBooks(prevBooks => prevBooks.map(book => book.id === updatedBook.id ? updatedBook : book));
     };
     const handleUserUpdated = (updatedUser) => {
         setUsers(prevUsers => prevUsers.map(user => user.id === updatedUser.id ? updatedUser : user));
+    }
+    const handleRoleUpdated = (updatedRole) => {
+        setRoles(prevRoles => prevRoles.map(role => role.id === updatedRole.id ? updatedRole:role));
     }
     const handleBookDeleted = (deletedBookId) => {
         setBooks(prevBooks => prevBooks.filter(book => book.id !== deletedBookId));
@@ -70,6 +98,10 @@ const App = () => {
     
     const handleUserDeleted = (deletedUserId) => {
         setUsers(prevUsers => prevUsers.filter(user => user.id !== deletedUserId));
+    }
+    
+    const handleRoleDeleted = (deletedRoleId) =>{
+        setRoles(prevRoles => prevRoles.filter(role => role.id !== deletedRoleId));
     }
     // const handleSearchResults = (searchResults) => {
     //     setBooks(searchResults);
@@ -81,20 +113,26 @@ const App = () => {
             <div>
                 <h1>Bookstore</h1>
                 <Routes>
-                    <Route path="/" element={<LoginUser/>}/>
-                    <Route path="/bookstore" element={<MainPage/>}/>
-                    <Route path="/bookstore/books" element={<BookList booksList={books}/>}/>
-                    <Route path="/bookstore/users" element={<UserList users={users}/> }/>
-                    <Route path="/bookstore/books/add" element={<AddBook onBookAdded={handleBookAdded}/>}/>
-                    <Route path="/bookstore/books/edit/:id" element={<EditBook onBookUpdated={handleBookUpdated}/>}/>
-                    <Route path="/bookstore/books/delete/:id" element={<DeleteBook onBookDeleted={handleBookDeleted}/>}/>
-                    <Route path="/bookstore/books/detail/:id" element={<DetailBook/>}/>
-                    <Route path="/bookstore/users/add" element={<AddUser onUserAdded={handleUserAdded}/>}/>
-                    <Route path="/bookstore/users/edit/:id" element={<EditUser onUserUpdated={handleUserUpdated}/>}/>
-                    <Route path="/bookstore/users/delete/:id" element={<DeleteUser onUserDeleted={handleUserDeleted}/>}/>
-                    <Route path="/bookstore/users/detail/:id" element={<DetailUser/>}/>
-                    <Route path="/bookstore/users/addUserBook/:id" element={<UserBookList booksList={books} onUserLibraryUpdated={handleUserUpdated}/>}/>
-                    <Route path="/bookstore/users/library/remove" element={<EditUserLibrary/>}/>
+                    <Route path="/bookstore" element={<LoginUser/>}/>
+                    <Route path="/bookstore/:role" element={<MainPageAdmin/>}/>
+                    <Route path="/bookstore/:role/books" element={<BookList booksList={books}/>}/>
+                    <Route path="/bookstore/:role/users" element={<UserList users={users}/> }/>
+                    <Route path="/bookstore/:rolePara/roles" element={<RoleList roles={roles}/>}/>
+                    <Route path="/bookstore/:role/books/add" element={<AddBook onBookAdded={handleBookAdded}/>}/>
+                    <Route path="/bookstore/:role/books/edit/:id" element={<EditBook onBookUpdated={handleBookUpdated}/>}/>
+                    <Route path="/bookstore/:role/books/delete/:id" element={<DeleteBook onBookDeleted={handleBookDeleted}/>}/>
+                    <Route path="/bookstore/:role/books/detail/:id" element={<DetailBook/>}/>
+                    <Route path="/bookstore/:role/users/add" element={<AddUser onUserAdded={handleUserAdded} roles={roles}/>}/>
+                    <Route path="/bookstore/:role/users/edit/:id" element={<EditUser onUserUpdated={handleUserUpdated}/>}/>
+                    <Route path="/bookstore/:role/users/delete/:id" element={<DeleteUser onUserDeleted={handleUserDeleted}/>}/>
+                    <Route path="/bookstore/:role/users/detail/:id" element={<DetailUser/>}/>
+                    <Route path="/bookstore/:role/users/addUserBook/:id" element={<UserBookList booksList={books} onUserLibraryUpdated={handleUserUpdated}/>}/>
+                    <Route path="/bookstore/:role/users/library/remove" element={<EditUserLibrary/>}/>
+                    <Route path="/bookstore/:rolePara/roles/add" element={<AddRole onRoleAdded={handleRoleAdded}/>}/>
+                    <Route path="/bookstore/:rolePara/roles/delete/:id" element={<DeleteRole onRoleDeleted={handleRoleDeleted}/>}/>
+                    <Route path="/bookstore/:rolePara/roles/detail/:id" element={<RoleDetail/>}/>
+                    <Route path="/bookstore/:rolePara/roles/edit/:id" element={<RoleEdit onRoleUpdated={handleRoleUpdated}/>}/>
+                        
                 </Routes>
             </div>
         </Router>

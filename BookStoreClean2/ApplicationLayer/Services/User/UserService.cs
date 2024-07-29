@@ -2,8 +2,10 @@
 using BookStoreClean2.ApplicationLayer.DTOs;
 using BookStoreClean2.ApplicationLayer.DTOs.User;
 using BookStoreClean2.ApplicationLayer.Interfaces.User;
+using BookStoreClean2.ApplicationLayer.Services.Role;
 using BookStoreClean2.CoreLayer.Entities;
 using BookStoreClean2.CoreLayer.Interfaces;
+using BookStoreClean2.CoreLayer.Interfaces.Role;
 using BookStoreClean2.CoreLayer.Interfaces.UserBook;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,20 +17,24 @@ public class UserService : IUserService
     public required IPasswordHasher<CoreLayer.Entities.User> _passwordHasher;
     public required IUserRepository _userRepository;
     public required ILibraryRepository _libraryRepository;
-    public required IBookRepository _bookRepository;
+    public required IRoleRepository _roleRepository;
 
-    public UserService(IPasswordHasher<CoreLayer.Entities.User> passwordHasher, IUserRepository userRepository, ILibraryRepository libraryRepository, IBookRepository bookRepository)
+    public UserService(IPasswordHasher<CoreLayer.Entities.User> passwordHasher, 
+        IUserRepository userRepository, 
+        ILibraryRepository libraryRepository,
+        IRoleRepository roleRepository)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
-        _bookRepository = bookRepository;
         _libraryRepository = libraryRepository;
+        _roleRepository = roleRepository;
     }
 
     public async Task<UserDto> GetUserByIdAsync(string id)
     {
         var user = await _userRepository.GetUserByIdAsync(id);
         var books = await _libraryRepository.GetBooksByUserIdAsync(id);
+        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
         var userDto = new UserDto
         {
             Id = user.Id,
@@ -38,6 +44,7 @@ public class UserService : IUserService
             PhoneNumber = user.PhoneNumber,
             Email = user.Email,
             PasswordHash = user.PasswordHash,
+            RoleName = role.Name,
             Books = books.Select(book => new BookDto
             {
                 Id = book.Id,
@@ -59,6 +66,7 @@ public class UserService : IUserService
         foreach (var user in users)
         {
             var userBooks = await _libraryRepository.GetBooksByUserIdAsync(user.Id);
+            var userRole = await _roleRepository.GetRoleByIdAsync(user.RoleId);
             var userDto  = new UserDto
             {
                 Id = user.Id,
@@ -68,6 +76,7 @@ public class UserService : IUserService
                 PhoneNumber = user.PhoneNumber,
                 PasswordHash = user.PasswordHash,
                 Email = user.Email,
+                RoleName = userRole.Name,
                 Books = userBooks.Select(book => new BookDto
                 {
                     Id = book.Id,
@@ -87,6 +96,7 @@ public class UserService : IUserService
 
     public async Task<UserDto> CreateUserAsync(RegisterUserDto registerUserDto)
     {
+        var role = await _roleRepository.GetRoleByIdAsync(registerUserDto.RoleId);
         var user = new CoreLayer.Entities.User
         {
             Id = Guid.NewGuid().ToString("N").Substring(0, 12),
@@ -94,7 +104,10 @@ public class UserService : IUserService
             FirstName = registerUserDto.FirstName,
             LastName = registerUserDto.LastName,
             Email = registerUserDto.Email,
-            PhoneNumber = registerUserDto.PhoneNumber
+            PhoneNumber = registerUserDto.PhoneNumber,
+            RoleId = role.Id,
+            Role = role
+            
         };
         user.PasswordHash = _passwordHasher.HashPassword(user, registerUserDto.Password);
         await _userRepository.AddUserAsync(user);
@@ -106,14 +119,15 @@ public class UserService : IUserService
            FirstName = user.FirstName,
            LastName = user.LastName,
            Email = user.Email,
-           PhoneNumber = user.PhoneNumber
+           PhoneNumber = user.PhoneNumber,
+           RoleName = role.Name
         };
     }
 
     public async Task<UpdateUserDto> UpdateUserAsync(string id, UpdateUserDto updateUserDto)
     {
         var user = await _userRepository.GetUserByIdAsync(id);
-       
+        var role = await _roleRepository.GetRoleIdByName(updateUserDto.RoleName);
         if (user == null)
         {
             return null;
@@ -124,6 +138,8 @@ public class UserService : IUserService
         user.Username = updateUserDto.Username;
         user.Email = updateUserDto.Email;
         user.PhoneNumber = updateUserDto.PhoneNumber;
+        user.Role = role;
+        user.RoleId = role.Id;
         
 
         try
@@ -149,6 +165,7 @@ public class UserService : IUserService
     public async Task<UserDto> AuthenticateUserAsync(string username, string password)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
+        var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
         if (user == null)
         {
             return null;
@@ -164,7 +181,8 @@ public class UserService : IUserService
         {
             Id = user.Id,
             Username = user.Username,
-            PasswordHash = user.PasswordHash
+            PasswordHash = user.PasswordHash,
+            RoleName = role.Name
         };
     }
 
@@ -179,6 +197,20 @@ public class UserService : IUserService
             LastName = user.LastName,
             Email = user.Email,
             PhoneNumber = user.PhoneNumber
+        };
+    }
+
+    public async Task<UserDto> GetUserByRoleAsync(CoreLayer.Entities.Role role)
+    {
+        var user = await _userRepository.GetUserByRoleAsync(role.Id);
+        return new UserDto
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber,
+            Username = user.Username
         };
     }
 

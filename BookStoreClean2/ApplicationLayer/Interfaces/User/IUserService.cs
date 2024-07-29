@@ -12,5 +12,7 @@ public interface IUserService
     Task<UserDto> AuthenticateUserAsync(string username, string password);
 
     Task<UserDto> GetUserByUsernameAsync(string username);
-    
+
+    Task<UserDto> GetUserByRoleAsync(CoreLayer.Entities.Role role);
+
 }

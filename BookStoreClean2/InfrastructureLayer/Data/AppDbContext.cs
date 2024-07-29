@@ -11,6 +11,8 @@ public class AppDbContext : DbContext
     public DbSet<User> Users { get; set; }
     
     public DbSet<Library> UserBooks { get; set; }
+    
+    public DbSet<Role> Roles { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Book>(entity =>
@@ -32,6 +34,12 @@ public class AppDbContext : DbContext
             .HasOne(ub => ub.Book)
             .WithMany(b => b.UserBooks)
             .HasForeignKey(ub => ub.BookId);
+        
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.Role)
+            .WithMany(r => r.Users)
+            .HasForeignKey(u => u.RoleId)
+            .OnDelete(DeleteBehavior.Restrict);
 
     }
 }

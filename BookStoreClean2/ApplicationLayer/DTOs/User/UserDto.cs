@@ -12,6 +12,8 @@ public class UserDto
     public string PasswordHash { get; set;}
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
+    
+    public string RoleName { get; set; }
     public ICollection<BookDto> Books { get; set; }
     
 }

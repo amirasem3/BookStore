@@ -3,6 +3,7 @@ using BookStoreClean.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreClean2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240727111855_AddRoleFieldToUser")]
+    partial class AddRoleFieldToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,20 +61,6 @@ namespace BookStoreClean2.Migrations
                     b.ToTable("UserBooks");
                 });
 
-            modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.Role", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -97,17 +86,15 @@ namespace BookStoreClean2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
+                    b.Property<string>("Role")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
 
                     b.HasIndex("Username")
                         .IsUnique();
@@ -134,25 +121,9 @@ namespace BookStoreClean2.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.User", b =>
-                {
-                    b.HasOne("BookStoreClean2.CoreLayer.Entities.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.Book", b =>
                 {
                     b.Navigation("UserBooks");
-                });
-
-            modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.Role", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("BookStoreClean2.CoreLayer.Entities.User", b =>

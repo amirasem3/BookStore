@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const DeleteUser = ({onUserDeleted}) => {
     const { id } = useParams();
+    const {role} = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
@@ -23,7 +24,7 @@ const DeleteUser = ({onUserDeleted}) => {
             .then(() => {
                 console.log('Book deleted!');
                 onUserDeleted(id);
-                navigate('/bookstore/users');
+                navigate(`/bookstore/${role}/users`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -54,7 +55,7 @@ const DeleteUser = ({onUserDeleted}) => {
                 <strong>Phone Number</strong> {user.phoneNumber}
             </div>
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate('/bookstore/users')}>No</button>
+            <button onClick={() => navigate(`/bookstore/${role}/users`)}>No</button>
         </div>
     );
 };

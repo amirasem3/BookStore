@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const EditBook = ({ onBookUpdated }) => {
     const { id } = useParams();
+    const {role} = useParams();
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
@@ -40,7 +41,7 @@ const EditBook = ({ onBookUpdated }) => {
             .then(response => {
                 console.log('Book updated!', response.data);
                 onBookUpdated(response.data);
-                navigate('/bookstore/books');
+                navigate(`/bookstore/${role}/books`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -65,7 +66,7 @@ const EditBook = ({ onBookUpdated }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Update Book</button>
-                <button onClick={() => navigate('/bookstore/books')}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/books`)}>Cancel</button>
             </form>
         </div>
     );

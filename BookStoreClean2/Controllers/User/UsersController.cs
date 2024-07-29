@@ -55,6 +55,13 @@ public class UsersController : ControllerBase
         var users = await _userService.GetAllUsersAsync();
         return Ok(users);
     }
+
+    [HttpGet("GetUserByRole")]
+    public async Task<IActionResult> GetUserByRole(CoreLayer.Entities.Role role)
+    {
+        var user = await _userService.GetUserByRoleAsync(role);
+        return Ok(user);
+    }
     
     [HttpPost("RegisterUser")]
         
@@ -86,19 +93,7 @@ public class UsersController : ControllerBase
 
         return Ok(updatedUser);
     }
-
-    // [HttpPut("AddBookToUserLibrary")]
-    // public async Task<IActionResult> AddBookToUserLibrary(LibraryAddDto library)
-    // {
-    //     var result = await _libraryService.AddLibraryRecordAsync(library.UserId, library.BookId);
-    //
-    //   if (!result)
-    //   {
-    //       return NotFound("Your Book or User does Not Exist");
-    //   }
-    //
-    //   return Ok($"The book successfully ({library.BookId}) added to user ({library.UserId}) library.");
-    // }
+    
     [HttpDelete("RemoveUser")]
     public async Task<IActionResult> RemoveUser(string id)
     {
@@ -120,7 +115,7 @@ public class UsersController : ControllerBase
             return NotFound();
         }
 
-        return Ok($"The user with Username {loginRequestDto.Username} successfully Logged In");
+        return Ok(user);
             
     }
     

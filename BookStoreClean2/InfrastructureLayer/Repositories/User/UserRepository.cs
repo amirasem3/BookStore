@@ -114,5 +114,10 @@ public class UserRepository :IUserRepository
         Console.WriteLine($"Returning user {user.Id} with {user.Books.ToList()} books.");
         return true;
     }
+
+    public async Task<User> GetUserByRoleAsync(string roleId)
+    {
+        return await _context.Users.SingleOrDefaultAsync(user => user.RoleId == roleId);
+    }
     
 }

@@ -1,17 +1,25 @@
 ﻿// src/AddUser.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-const AddUser = ({ onUserAdded }) => {
+const AddUser = ({ onUserAdded , roles}) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
+    const [roleId, setRoleId] = useState('');
     const navigate = useNavigate();
+    const [selectedRole, setSelectedRole]  = useState('');
+    const {role} = useParams();
 
+
+    const handleChange = (event) => {
+        const value = event.target.value;
+        setSelectedRole(value);
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -21,7 +29,8 @@ const AddUser = ({ onUserAdded }) => {
             username,
             email,
             phoneNumber,
-            password
+            password,
+            roleId:selectedRole
         };
 
         axios.post('https://localhost:7051/api/users/RegisterUser', newBook)
@@ -34,7 +43,8 @@ const AddUser = ({ onUserAdded }) => {
                 setEmail('');
                 setPhoneNumber('');
                 setPassword('');
-                navigate('/bookstore/users');
+                setRoleId('');
+                navigate(`/bookstore/${role}/users`);
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);
@@ -69,8 +79,19 @@ const AddUser = ({ onUserAdded }) => {
                     <label>Phone Number</label>
                     <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required/>
                 </div>
+                <div>
+                    <label htmlFor="roleDropdown">Choose a role:</label>
+                    <select id="roleDropdown" value={selectedRole} onChange={handleChange}>
+                        <option value="" disabled>Select a role</option>
+                        {roles.map((role) => (
+                            <option key={role.name} value={role.id}>
+                                {role.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
                 <button type="submit">Register</button>
-                <button onClick={() => navigate('/bookstore/users')}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/users`)}>Cancel</button>
             </form>
         </div>
     );
