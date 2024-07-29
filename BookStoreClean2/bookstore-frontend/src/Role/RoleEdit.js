@@ -1,20 +1,21 @@
 ﻿// src/ Role/RoleEdit.js
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
 
-const RoleEdit = ({ onRoleUpdated }) => {
-    const { id } = useParams();
+const RoleEdit = ({onRoleUpdated}) => {
+    const {id} = useParams();
     const {rolePara} = useParams();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [error, setError] = useState(null);
+    const {userId}  = useParams();
 
     useEffect(() => {
         axios.get(`https://localhost:7051/api/Role/GetRoleById?id=${id}`)
             .then(response => {
                 const role = response.data;
-               setName(role.name);
+                setName(role.name);
             })
             .catch(error => {
                 console.error('There was an error fetching the role!', error);
@@ -28,14 +29,18 @@ const RoleEdit = ({ onRoleUpdated }) => {
 
         const updatedRole = {
             id,
-           name
+            name
         };
 
         axios.put(`https://localhost:7051/api/Role/UpdateRole`, updatedRole)
             .then(response => {
                 console.log('Book updated!', response.data);
                 onRoleUpdated(response.data);
-                navigate(`/bookstore/${rolePara}/roles`);
+
+
+
+                navigate(`/bookstore/${rolePara}/${userId}/roles`);
+
             })
             .catch(error => {
                 console.error('There was an error updating the role!', error);
@@ -53,7 +58,7 @@ const RoleEdit = ({ onRoleUpdated }) => {
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} required/>
                 </div>
                 <button type="submit">Update Role</button>
-                <button onClick={() => navigate(`/bookstore/${rolePara}/roles`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>Cancel</button>
             </form>
         </div>
     );

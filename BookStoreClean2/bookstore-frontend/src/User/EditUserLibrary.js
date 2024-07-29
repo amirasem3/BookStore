@@ -33,7 +33,13 @@ const EditUserLibrary = ({onUserDeleted}) => {
         axios.delete(`https://localhost:7051/api/Library/RemoveBookFromLibrary?UserId=${userId}&BookId=${bookId}`)
             .then(() => {
                 console.log('Book deleted!');
-                navigate(`/bookstore/${role}/users/edit/${userId}`);
+                if (role.includes("Admin")){
+
+                    navigate(`/bookstore/${role}/users/edit/${userId}`);
+                }
+                else {
+                    navigate(`/bookstore/${role}/users/${userId}/detail/${userId}`)
+                }
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -42,26 +48,51 @@ const EditUserLibrary = ({onUserDeleted}) => {
     if (!user){
         return <div> Loading .... </div>;
     }
+    
+    if (role.includes("Admin")){
+        return (
+            <div>
+                <h2>Remove Book</h2>
+                <p>Are you sure you want to delete the following book from the library?</p>
 
-    return (
-        <div>
-            <h2>Remove Book</h2>
-            <p>Are you sure you want to delete the following book from the library?</p>
+                <div>
+                    <strong>Title:</strong> {user.title}
+                </div>
+                <div>
+                    <strong>Author:</strong> {user.author}
+                </div>
+                <div>
+                    <strong>Price : </strong> {user.price}
+                </div>
 
-            <div>
-                <strong>Title:</strong> {user.title}
+                <button onClick={() => handleDelete()}>Yes</button>
+                /bookstore/:role/users/:userId/detail/:id
+                <button onClick={() => navigate(`/bookstore/${role}/users/edit/${userId}`)}>No</button>
             </div>
+        );
+    }
+    else {
+        return (
             <div>
-                <strong>Author:</strong> {user.author}
+                <h2>Remove Book</h2>
+                <p>Are you sure you want to delete the following book from the library?</p>
+
+                <div>
+                    <strong>Title:</strong> {user.title}
+                </div>
+                <div>
+                    <strong>Author:</strong> {user.author}
+                </div>
+                <div>
+                    <strong>Price : </strong> {user.price}
+                </div>
+
+                <button onClick={() => handleDelete()}>Yes</button>
+                <button onClick={() => navigate(`/bookstore/${role}/users/${userId}/detail/${userId}`)}>No</button>
             </div>
-            <div>
-                <strong>Price : </strong> {user.price}
-            </div>
-           
-            <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate(`/bookstore/${role}/users/edit/${userId}`)}>No</button>
-        </div>
-    );
+        );
+    }
+   
 };
 
 export default EditUserLibrary;

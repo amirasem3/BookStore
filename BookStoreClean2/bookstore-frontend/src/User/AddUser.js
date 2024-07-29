@@ -14,7 +14,7 @@ const AddUser = ({ onUserAdded , roles}) => {
     const navigate = useNavigate();
     const [selectedRole, setSelectedRole]  = useState('');
     const {role} = useParams();
-
+    const [userId, setUserId] = useState('');
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -44,7 +44,8 @@ const AddUser = ({ onUserAdded , roles}) => {
                 setPhoneNumber('');
                 setPassword('');
                 setRoleId('');
-                navigate(`/bookstore/${role}/users`);
+                setUserId('');
+                navigate(`/bookstore/${role}/${response.data.id}/users`);
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);

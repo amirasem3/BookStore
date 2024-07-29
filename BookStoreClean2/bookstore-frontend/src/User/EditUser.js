@@ -56,7 +56,7 @@ const EditUser = ({onUserUpdated}) => {
             .then(response => {
                 console.log('user updated!', response.data);
                 onUserUpdated(response.data);
-                navigate(`/bookstore/${role}/users`);
+                navigate(`/bookstore/${role}/${id}/users`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);

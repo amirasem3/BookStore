@@ -11,7 +11,7 @@ const EditBook = ({ onBookUpdated }) => {
     const [author, setAuthor] = useState('');
     const [price, setPrice] = useState('');
     const [error, setError] = useState(null);
-
+    const {userId} = useParams();
     useEffect(() => {
         axios.get(`https://localhost:7051/api/books/GetBookById/${id}`)
             .then(response => {
@@ -41,7 +41,7 @@ const EditBook = ({ onBookUpdated }) => {
             .then(response => {
                 console.log('Book updated!', response.data);
                 onBookUpdated(response.data);
-                navigate(`/bookstore/${role}/books`);
+                navigate(`/bookstore/${role}/${userId}/books`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -66,7 +66,7 @@ const EditBook = ({ onBookUpdated }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Update Book</button>
-                <button onClick={() => navigate(`/bookstore/${role}/books`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/${userId}/books`)}>Cancel</button>
             </form>
         </div>
     );

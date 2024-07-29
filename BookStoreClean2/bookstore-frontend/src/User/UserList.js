@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 const UserList = ({ users }) => {
     const { role } = useParams();
+    const {userId} = useParams();
     const navigate = useNavigate();
     
     
@@ -28,7 +29,7 @@ const UserList = ({ users }) => {
                     <tbody>
                     {users.map(user => (
                         <tr key={user.id}>
-                            <td><Link to={`/bookstore/${role}/users/detail/${user.id}`}>{user.id}</Link></td>
+                            <td><Link to={`/bookstore/${role}/users/${user.id}/detail/${user.id}`}>{user.id}</Link></td>
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
                             <td>{user.username}</td>
@@ -45,7 +46,8 @@ const UserList = ({ users }) => {
                     ))}
                     </tbody>
                 </table>
-                <button onClick={() => navigate(`/bookstore/${role}`)}>Back to Main</button>
+               
+                <button onClick={() => navigate(`/bookstore/${role}/${userId}`)}>Back to Main</button>
             </div>
         );
     }

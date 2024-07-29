@@ -24,7 +24,7 @@ const DeleteUser = ({onUserDeleted}) => {
             .then(() => {
                 console.log('Book deleted!');
                 onUserDeleted(id);
-                navigate(`/bookstore/${role}/users`);
+                navigate(`/bookstore/${role}/${id}/users`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);

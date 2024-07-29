@@ -24,7 +24,13 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
             .then(response => {
                 console.log('User library updated!', response.data);
                 onUserLibraryUpdated(response.data);
-                navigate(`/bookstore/${role}/users/edit/${id}`);
+                if (role.includes("Admin")){
+                    navigate(`/bookstore/${role}/users/edit/${id}`);
+                }
+                else {
+
+                    navigate(`/bookstore/${role}/users/${id}/detail/${id}`);
+                }
             })
             .catch(error => {
                 console.error('There was an error updating the user library!', error);
@@ -60,7 +66,7 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
                 ))}
                 </tbody>
             </table>
-            <button onClick={() => navigate(`/bookstore/${role}`)}>Back to Main</button>
+            <button onClick={() => navigate(`/bookstore/${role}/${id}`)}>Back to Main</button>
         </div>
     );
 };

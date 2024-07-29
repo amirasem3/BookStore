@@ -9,6 +9,7 @@ const AddRole = ({onRoleAdded}) => {
     const [roleName, setRoleName] = useState('');
     const navigate = useNavigate();
     const {role} = useParams();
+    const {userId} = useParams();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,7 +19,7 @@ const AddRole = ({onRoleAdded}) => {
                 console.log('Role added!', response.data);
                 onRoleAdded(response.data);  // Call the callback with the new book
                setRoleName('');
-                navigate(`/bookstore/${role}/roles`);
+                navigate(`/bookstore/${role}/${userId}/roles`);
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);
@@ -35,7 +36,7 @@ const AddRole = ({onRoleAdded}) => {
                 </div>
             
                 <button type="submit">Add Role</button>
-                <button onClick={() => navigate(`/bookstore/${role}/roles`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/${userId}/roles`)}>Cancel</button>
             </form>
         </div>
     );

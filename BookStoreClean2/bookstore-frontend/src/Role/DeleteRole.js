@@ -8,6 +8,7 @@ const DeleteRole = ({onRoleDeleted}) => {
     const {rolePara} = useParams();
     const navigate = useNavigate();
     const [role, setRole] = useState(null);
+    const {userId} = useParams();
 
     useEffect(() => {
         axios.get(`https://localhost:7051/api/Role/GetRoleById?id=${id}`)
@@ -24,7 +25,7 @@ const DeleteRole = ({onRoleDeleted}) => {
             .then(() => {
                 console.log('Role deleted!');
                 onRoleDeleted(id);
-                navigate(`/bookstore/${rolePara}/roles`);
+                navigate(`/bookstore/${rolePara}/${userId}/roles`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -47,7 +48,7 @@ const DeleteRole = ({onRoleDeleted}) => {
             </div>
         
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate(`/bookstore/${rolePara}/roles`)}>No</button>
+            <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>No</button>
         </div>
     );
 };

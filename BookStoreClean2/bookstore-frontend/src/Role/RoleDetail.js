@@ -8,6 +8,7 @@ const RoleDetail = () => {
     const {rolePara} = useParams();
     const navigate = useNavigate();
     const [role, setRole] = useState(null);
+    const {userId}  = useParams();
 
     useEffect(() => {
         axios.get(`https://localhost:7051/api/Role/GetRoleById?id=${id}`)
@@ -31,7 +32,7 @@ const RoleDetail = () => {
             </div>
             
 
-            <button onClick={() => navigate(`/bookstore/${rolePara}/roles`)}>Back to list</button>
+            <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>Back to list</button>
         </div>
     );
 };

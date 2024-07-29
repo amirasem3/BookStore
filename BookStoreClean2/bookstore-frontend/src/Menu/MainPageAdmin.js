@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Link, Route, Routes, useNavigate, useParams} fr
 
 const MainPageAdmin = () => {
     const { role } = useParams();
+    const {userId} = useParams();
     const navigate = useNavigate();
     
     if (role.includes("Admin")){
@@ -15,11 +16,11 @@ const MainPageAdmin = () => {
                 <h1>Welcome to Book Store</h1>
                 <strong>ROLE:</strong> {role}
                 <br/>
-                <Link to={`/bookstore/${role}/books`}>Books</Link>
+                <Link to={`/bookstore/${role}/${userId}/books`}>Books</Link>
                 <br/>
-                <Link to={`/bookstore/${role}/users`}>Users</Link>
+                <Link to={`/bookstore/${role}/${userId}/users`}>Users</Link>
                 <br/>
-                <Link to={`/bookstore/${role}/roles`}>Role Management</Link>
+                <Link to={`/bookstore/${role}/${userId}/roles`}>Role Management</Link>
                 <br/>
                 <button onClick={() => navigate(`/bookstore/`)}>Logout</button>
             </div>
@@ -32,9 +33,10 @@ const MainPageAdmin = () => {
             <h1>Welcome to Book Store</h1>
             <strong>ROLE:</strong> {role}
             <br/>
-            <Link to={`/bookstore/${role}/books`}>Books</Link>
+            <Link to={`/bookstore/${role}/${userId}/books`}>Books</Link>
             <br/>
-            <Link to={`/bookstore/${role}/users`}>Users</Link>
+            
+            <Link to={`/bookstore/${role}/users/${userId}/detail/${userId}`}>Profile</Link>
             <br/>
             <button onClick={() => navigate(`/bookstore`)}>Logout</button>
         </div>
