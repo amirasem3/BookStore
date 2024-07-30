@@ -35,10 +35,10 @@ const EditUserLibrary = ({onUserDeleted}) => {
                 console.log('Book deleted!');
                 if (role.includes("Admin")){
 
-                    navigate(`/bookstore/${role}/users/edit/${userId}`);
+                    navigate(`https://bookstorefront.liara.run/bookstore/${role}/users/edit/${userId}`);
                 }
                 else {
-                    navigate(`/bookstore/${role}/users/${userId}/detail/${userId}`)
+                    navigate(`https://bookstorefront.liara.run/bookstore/${role}/users/${userId}/detail/${userId}`)
                 }
             })
             .catch(error => {
@@ -67,7 +67,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
 
                 <button onClick={() => handleDelete()}>Yes</button>
                 /bookstore/:role/users/:userId/detail/:id
-                <button onClick={() => navigate(`/bookstore/${role}/users/edit/${userId}`)}>No</button>
+                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/users/edit/${userId}`)}>No</button>
             </div>
         );
     }
@@ -88,7 +88,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
                 </div>
 
                 <button onClick={() => handleDelete()}>Yes</button>
-                <button onClick={() => navigate(`/bookstore/${role}/users/${userId}/detail/${userId}`)}>No</button>
+                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/users/${userId}/detail/${userId}`)}>No</button>
             </div>
         );
     }

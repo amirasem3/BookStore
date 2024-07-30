@@ -40,7 +40,7 @@ const DetailBook = () => {
                 <strong>Price:</strong> {book.price}
             </div>
             
-            <button onClick={()=> navigate(`/bookstore/${role}/${userId}/books`)}>Back to list</button>
+            <button onClick={()=> navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}/books`)}>Back to list</button>
         </div>
     );
 };

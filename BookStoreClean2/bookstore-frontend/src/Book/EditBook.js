@@ -41,7 +41,7 @@ const EditBook = ({ onBookUpdated }) => {
             .then(response => {
                 console.log('Book updated!', response.data);
                 onBookUpdated(response.data);
-                navigate(`/bookstore/${role}/${userId}/books`);
+                navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}/books`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -66,7 +66,7 @@ const EditBook = ({ onBookUpdated }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Update Book</button>
-                <button onClick={() => navigate(`/bookstore/${role}/${userId}/books`)}>Cancel</button>
+                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}/books`)}>Cancel</button>
             </form>
         </div>
     );

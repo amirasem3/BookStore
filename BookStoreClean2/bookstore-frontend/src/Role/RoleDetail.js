@@ -32,7 +32,7 @@ const RoleDetail = () => {
             </div>
             
 
-            <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>Back to list</button>
+            <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles`)}>Back to list</button>
         </div>
     );
 };

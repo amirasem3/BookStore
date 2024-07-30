@@ -24,7 +24,7 @@ const DeleteUser = ({onUserDeleted}) => {
             .then(() => {
                 console.log('Book deleted!');
                 onUserDeleted(id);
-                navigate(`/bookstore/${role}/${id}/users`);
+                navigate(`https://bookstorefront.liara.run/bookstore/${role}/${id}/users`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -55,7 +55,7 @@ const DeleteUser = ({onUserDeleted}) => {
                 <strong>Phone Number</strong> {user.phoneNumber}
             </div>
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate(`/bookstore/${role}/users`)}>No</button>
+            <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/users`)}>No</button>
         </div>
     );
 };

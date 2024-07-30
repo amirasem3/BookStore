@@ -25,7 +25,7 @@ const DeleteRole = ({onRoleDeleted}) => {
             .then(() => {
                 console.log('Role deleted!');
                 onRoleDeleted(id);
-                navigate(`/bookstore/${rolePara}/${userId}/roles`);
+                navigate(`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -48,7 +48,7 @@ const DeleteRole = ({onRoleDeleted}) => {
             </div>
         
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>No</button>
+            <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles`)}>No</button>
         </div>
     );
 };

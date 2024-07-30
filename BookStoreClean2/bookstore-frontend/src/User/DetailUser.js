@@ -75,7 +75,7 @@ const DetailUser = () => {
                     </table>
                 </div>
 
-                <button onClick={() => navigate(`/bookstore/${role}/users`)}>Back to list</button>
+                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/users`)}>Back to list</button>
             </div>
         );
     }
@@ -128,7 +128,7 @@ const DetailUser = () => {
                                 <td>{book.author}</td>
                                 <td>{book.price}</td>
                                 <td><Link
-                                    to={`/bookstore/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
+                                    to={`https://bookstorefront.liara.run/bookstore/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
                                     From the Library</Link></td>
                             </tr>
                         ))}
@@ -136,8 +136,8 @@ const DetailUser = () => {
                     </table>
                 </div>
 
-                <button onClick={() => navigate(`/bookstore/${role}/${userId}`)}>Back To Main</button>
-                <button onClick={() => navigate(`/bookstore/${role}/users/addUserBook/${id}`)}>Add Books</button>
+                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}`)}>Back To Main</button>
+                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/users/addUserBook/${id}`)}>Add Books</button>
             </div>
         );
     }
