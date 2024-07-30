@@ -11,7 +11,7 @@ const DeleteBook = ({onBookDeleted}) => {
     const [book, setBook] = useState(null);
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/books/GetBookById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`)
             .then(response => {
                 setBook(response.data);
             })
@@ -21,7 +21,7 @@ const DeleteBook = ({onBookDeleted}) => {
     }, [id]);
 
     const handleDelete = () => {
-        axios.delete(`https://localhost:7051/api/books/DeleteBook/${id}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/books/DeleteBook/${id}`)
             .then(() => {
                 console.log('Book deleted!');
                 onBookDeleted(id);

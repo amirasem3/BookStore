@@ -10,8 +10,8 @@ const SearchBooks = ({ onSearchResults }) => {
     const fetchBooks = useCallback(
         debounce(async (term) => {
             const url = term
-                ? `https://localhost:7051/api/books/SearchBooks`
-                : `https://localhost:7051/api/books/AllBooks`;
+                ? `https://bookstoreclean.liara.run/api/books/SearchBooks`
+                : `https://bookstoreclean.liara.run/api/books/AllBooks`;
 
             try {
                 const response = await axios.get(url, {

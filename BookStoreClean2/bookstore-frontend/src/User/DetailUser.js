@@ -11,7 +11,7 @@ const DetailUser = () => {
     const {userId} = useParams();
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/users/GetUserById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`)
             .then(response => {
                 setUser(response.data);
             })

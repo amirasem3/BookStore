@@ -13,7 +13,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
     const userId = params.get('USER_ID');
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/books/GetBookById/${bookId}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${bookId}`)
             .then(response => {
                 setUser(response.data);
             })
@@ -30,7 +30,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
         };
 
        
-        axios.delete(`https://localhost:7051/api/Library/RemoveBookFromLibrary?UserId=${userId}&BookId=${bookId}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/Library/RemoveBookFromLibrary?UserId=${userId}&BookId=${bookId}`)
             .then(() => {
                 console.log('Book deleted!');
                 if (role.includes("Admin")){

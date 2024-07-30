@@ -13,7 +13,7 @@ const EditBook = ({ onBookUpdated }) => {
     const [error, setError] = useState(null);
     const {userId} = useParams();
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/books/GetBookById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`)
             .then(response => {
                 const book = response.data;
                 setTitle(book.title);
@@ -37,7 +37,7 @@ const EditBook = ({ onBookUpdated }) => {
             price: parseFloat(price)
         };
 
-        axios.put(`https://localhost:7051/api/books/UpdateBook/${id}`, updatedBook)
+        axios.put(`https://bookstoreclean.liara.run/api/books/UpdateBook/${id}`, updatedBook)
             .then(response => {
                 console.log('Book updated!', response.data);
                 onBookUpdated(response.data);

@@ -11,7 +11,7 @@ const DeleteRole = ({onRoleDeleted}) => {
     const {userId} = useParams();
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/Role/GetRoleById?id=${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/Role/GetRoleById?id=${id}`)
             .then(response => {
                 setRole(response.data);
             })
@@ -21,7 +21,7 @@ const DeleteRole = ({onRoleDeleted}) => {
     }, [id]);
 
     const handleDelete = () => {
-        axios.delete(`https://localhost:7051/api/Role/DeleteRole?roleId=${id}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/Role/DeleteRole?roleId=${id}`)
             .then(() => {
                 console.log('Role deleted!');
                 onRoleDeleted(id);

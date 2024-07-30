@@ -10,7 +10,7 @@ const DeleteUser = ({onUserDeleted}) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/users/GetUserById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`)
             .then(response => {
                 setUser(response.data);
             })
@@ -20,7 +20,7 @@ const DeleteUser = ({onUserDeleted}) => {
     }, [id]);
 
     const handleDelete = () => {
-        axios.delete(`https://localhost:7051/api/users/RemoveUser?id=${id}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/users/RemoveUser?id=${id}`)
             .then(() => {
                 console.log('Book deleted!');
                 onUserDeleted(id);

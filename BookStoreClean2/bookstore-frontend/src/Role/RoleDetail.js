@@ -11,7 +11,7 @@ const RoleDetail = () => {
     const {userId}  = useParams();
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/Role/GetRoleById?id=${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/Role/GetRoleById?id=${id}`)
             .then(response => {
                 setRole(response.data);
             })

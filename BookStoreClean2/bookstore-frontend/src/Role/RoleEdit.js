@@ -12,7 +12,7 @@ const RoleEdit = ({onRoleUpdated}) => {
     const {userId}  = useParams();
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/Role/GetRoleById?id=${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/Role/GetRoleById?id=${id}`)
             .then(response => {
                 const role = response.data;
                 setName(role.name);
@@ -32,7 +32,7 @@ const RoleEdit = ({onRoleUpdated}) => {
             name
         };
 
-        axios.put(`https://localhost:7051/api/Role/UpdateRole`, updatedRole)
+        axios.put(`https://bookstoreclean.liara.run/api/Role/UpdateRole`, updatedRole)
             .then(response => {
                 console.log('Book updated!', response.data);
                 onRoleUpdated(response.data);

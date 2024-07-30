@@ -11,7 +11,7 @@ const DetailBook = () => {
     const [book, setBook] = useState(null);
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/books/GetBookById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`)
             .then(response => {
                 setBook(response.data);
             })

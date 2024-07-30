@@ -18,7 +18,7 @@ const EditUser = ({onUserUpdated}) => {
     const [userBooks, setUserBooks] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://localhost:7051/api/users/GetUserById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`)
             .then(response => {
                 const user = response.data;
                 setFirstName(user.firstName);
@@ -52,7 +52,7 @@ const EditUser = ({onUserUpdated}) => {
 
         };
 
-        axios.put(`https://localhost:7051/api/users/UpdateUser`, updatedUser)
+        axios.put(`https://bookstoreclean.liara.run/api/users/UpdateUser`, updatedUser)
             .then(response => {
                 console.log('user updated!', response.data);
                 onUserUpdated(response.data);

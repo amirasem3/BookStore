@@ -41,7 +41,7 @@ const App = () => {
         fetchRoles();
     }, []);
     const fetchBooks = () => {
-        axios.get('https://localhost:7051/api/books/AllBooks')
+        axios.get('https://bookstoreclean.liara.run/api/books/AllBooks')
             .then(response => {
                 console.log('Books fetched:', response.data);
                 setBooks(response.data);
@@ -51,7 +51,7 @@ const App = () => {
             });
     };
     const fetchUsers = () => {
-        axios.get('https://localhost:7051/api/users/AllUsers')
+        axios.get('https://bookstoreclean.liara.run/api/users/AllUsers')
             .then(response => {
                 console.log('Users fetched:', response.data);
                 setUsers(response.data);
@@ -62,7 +62,7 @@ const App = () => {
     };
     
     const fetchRoles = () =>{
-        axios.get('https://localhost:7051/api/Role/GetAllRoles')
+        axios.get('https://bookstoreclean.liara.run/api/Role/GetAllRoles')
             .then(response =>{
                 console.log('Roles Fetched:', response.data);
                 setRoles(response.data);

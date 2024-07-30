@@ -33,7 +33,7 @@ const AddUser = ({ onUserAdded , roles}) => {
             roleId:selectedRole
         };
 
-        axios.post('https://localhost:7051/api/users/RegisterUser', newBook)
+        axios.post('https://bookstoreclean.liara.run/api/users/RegisterUser', newBook)
             .then(response => {
                 console.log('User added!', response.data);
                 onUserAdded(response.data);  // Call the callback with the new book

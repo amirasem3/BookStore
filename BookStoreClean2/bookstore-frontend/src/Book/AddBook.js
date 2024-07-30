@@ -19,7 +19,7 @@ const AddBook = ({ onBookAdded }) => {
             price: parseFloat(price)
         };
 
-        axios.post('https://localhost:7051/api/books/AddBook', newBook)
+        axios.post('https://bookstoreclean.liara.run/api/books/AddBook', newBook)
             .then(response => {
                 console.log('Book added!', response.data);
                 onBookAdded(response.data);  // Call the callback with the new book

@@ -76,6 +76,9 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    
+
+   
     // app.UseHttpsRedirection();
 }
 // Configure the HTTP request pipeline.
@@ -96,9 +99,14 @@ app.UseSwaggerUI(c =>
 });
 
 app.UseStaticFiles();
-
+app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToFile("index.html"); // Serve React app for unknown routes
+});
 // app.UseEndpoints(endpoint =>
 // {
 //     endpoint.MapFallbackToFile("BookStoreClean2/bookstore-frontend/public/index.html");
@@ -106,6 +114,6 @@ app.UseAuthorization();
 app.UseCors("AllowReactApp");
 
 
-app.MapControllers();
+// app.MapControllers();
 
 app.Run();

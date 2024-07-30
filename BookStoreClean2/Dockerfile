@@ -27,7 +27,7 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 RUN dotnet publish -c Release -o out
 
 # Apply database migrations
-RUN dotnet ef database update
+#RUN dotnet ef database update
 
 # Stage 2: Serve the application
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime

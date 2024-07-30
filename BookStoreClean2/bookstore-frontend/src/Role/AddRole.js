@@ -14,7 +14,7 @@ const AddRole = ({onRoleAdded}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post(`https://localhost:7051/api/Role/CreateRole?roleName=${roleName}`)
+        axios.post(`https://bookstoreclean.liara.run/api/Role/CreateRole?roleName=${roleName}`)
             .then(response => {
                 console.log('Role added!', response.data);
                 onRoleAdded(response.data);  // Call the callback with the new book

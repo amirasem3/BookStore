@@ -20,7 +20,7 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
             bookId:bookId
         };
 
-        axios.put(`https://localhost:7051/api/Library/AddBookToLibrary`, addedBook)
+        axios.put(`https://bookstoreclean.liara.run/api/Library/AddBookToLibrary`, addedBook)
             .then(response => {
                 console.log('User library updated!', response.data);
                 onUserLibraryUpdated(response.data);
