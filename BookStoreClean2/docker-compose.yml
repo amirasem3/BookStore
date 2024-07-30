@@ -1,0 +1,31 @@
+﻿version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-build
+    ports:
+      - "::3000"
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=development
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://*:80
+
+networks:
+  app-network:
+    driver: bridge

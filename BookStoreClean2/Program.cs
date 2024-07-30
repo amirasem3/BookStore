@@ -15,6 +15,7 @@ using BookStoreClean2.CoreLayer.Interfaces.Role;
 using BookStoreClean2.CoreLayer.Interfaces.UserBook;
 using BookStoreClean2.InfrastructureLayer.Repositories.Role;
 using BookStoreClean2.InfrastructureLayer.Repositories.UserBook;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -28,7 +29,7 @@ builder.Services.AddControllersWithViews();
 //     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 // });
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore3")));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
@@ -41,6 +42,12 @@ builder.Services.AddCors(options =>
         });
    
 });
+
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"/keys")) // Adjust the directory path as needed
+    .SetApplicationName("BookStoreCleanApp");
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -69,9 +76,10 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    // app.UseHttpsRedirection();
 }
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName=="Docker")
 {
     app.UseDeveloperExceptionPage();
 }
@@ -87,13 +95,16 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty; // Serve the Swagger UI at the app's root
 });
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthorization();
+// app.UseEndpoints(endpoint =>
+// {
+//     endpoint.MapFallbackToFile("BookStoreClean2/bookstore-frontend/public/index.html");
+// });
 app.UseCors("AllowReactApp");
 
-app.UseAuthorization();
 
 app.MapControllers();
 

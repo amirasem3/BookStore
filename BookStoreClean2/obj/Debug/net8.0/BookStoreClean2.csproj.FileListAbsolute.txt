@@ -280,3 +280,11 @@ C:\Projects\BookStore\BookStoreClean2\obj\Debug\net8.0\refint\BookStoreClean2.dl
 C:\Projects\BookStore\BookStoreClean2\obj\Debug\net8.0\BookStoreClean2.pdb
 C:\Projects\BookStore\BookStoreClean2\obj\Debug\net8.0\BookStoreClean2.genruntimeconfig.cache
 C:\Projects\BookStore\BookStoreClean2\obj\Debug\net8.0\ref\BookStoreClean2.dll
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\web.config
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\appsettings.Development.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\appsettings.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\bookstore-frontend\package-lock.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\bookstore-frontend\package.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\bookstore-frontend\public\manifest.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.deps.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.runtimeconfig.json
