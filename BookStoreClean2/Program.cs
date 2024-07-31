@@ -35,7 +35,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         builder =>
         {
-            builder.WithOrigins("https://bookstorefront.liara.run")
+            builder.WithOrigins("https://bookfront.liara.run", "http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowCredentials()
                 .AllowAnyMethod();

@@ -289,3 +289,4 @@ C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\bookstore-frontend\pu
 C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.deps.json
 C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.runtimeconfig.json
 C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.staticwebassets.runtime.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\bookstore-frontend\liara.json

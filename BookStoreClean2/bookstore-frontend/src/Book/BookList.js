@@ -1,8 +1,7 @@
 // src/BookList.js
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import { Link } from 'react-router-dom';
 import SearchBooks from "./SearchBooks";
-import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
 const BookList = ({booksList}) => {
     const [books, setBooks] = useState([]);
@@ -10,19 +9,7 @@ const BookList = ({booksList}) => {
     const { role } = useParams();
     const {userId} = useParams();
     
-    // useEffect(() => {
-    //     fetchBooks();
-    // }, []);
-    // const fetchBooks = () => {
-    //     axios.get('https://localhost:7051/api/books/AllBooks')
-    //         .then(response => {
-    //             console.log('Books fetched:', response.data);
-    //             setBooks(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error('There was an error fetching the books!', error);
-    //         });
-    // };
+    
     const handleSearchResults = (searchResults) => {
         setBooks(searchResults);
     }
