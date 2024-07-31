@@ -35,7 +35,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         builder =>
         {
-            builder.WithOrigins("http://179.19.0.1:3000", "http://localhost:3000", "https://bookstorefront.liara.run")
+            builder.WithOrigins("https://bookstorefront.liara.run")
                 .AllowAnyHeader()
                 .AllowCredentials()
                 .AllowAnyMethod();
@@ -101,6 +101,7 @@ app.UseSwaggerUI(c =>
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors("AllowReactApp");
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
@@ -111,7 +112,7 @@ app.UseEndpoints(endpoints =>
 // {
 //     endpoint.MapFallbackToFile("BookStoreClean2/bookstore-frontend/public/index.html");
 // });
-app.UseCors("AllowReactApp");
+
 
 
 // app.MapControllers();
