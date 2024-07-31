@@ -1,6 +1,6 @@
 ﻿{
   "react": {
     "mirror": false,
-    "sourceMap": false
+    "sourceMap": true
   }
 }
