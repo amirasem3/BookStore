@@ -27,11 +27,11 @@ const LoginUser = () => {
                 setRoleName(user.roleName);
                 setUser(user);
                 if (user.roleName.includes("Admin")){
-                    navigate(`https://bookstorefront.liara.run//bookstore/${user.roleName}/${user.id}`);    
+                    navigate(`/bookstore/${user.roleName}/${user.id}`);    
                 }
                 else {
 
-                    navigate(`https://bookstorefront.liara.run//bookstore/${user.roleName}/${user.id}`);
+                    navigate(`/bookstore/${user.roleName}/${user.id}`);
                 }
             })
             .catch(error => {

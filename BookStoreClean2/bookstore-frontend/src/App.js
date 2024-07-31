@@ -115,7 +115,7 @@ const App = () => {
                 <Routes basename="/bookstore">
                     <Route path="/" element={<Navigate to="/bookstore" />} />
                     <Route path="/bookstore" element={<LoginUser/>}/>
-                    <Route path="/:role/:userId" element={<MainPageAdmin/>}/>
+                    <Route path="/bookstore/:role/:userId" element={<MainPageAdmin/>}/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:role/:userId/books" element={<BookList booksList={books}/>}/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:role/:userId/users" element={<UserList users={users}/> }/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:rolePara/:userId/roles" element={<RoleList roles={roles}/>}/>
