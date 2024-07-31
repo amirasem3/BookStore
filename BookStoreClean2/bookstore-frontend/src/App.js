@@ -112,8 +112,8 @@ const App = () => {
         <Router>
             <div>
                 <h1>Bookstore</h1>
-                <Routes>
-                    <Route path="https://bookstorefront.liara.run/bookstore" element={<LoginUser/>}/>
+                <Routes basenam="/bookstore">
+                    <Route path="/bookstore" element={<LoginUser/>}/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:role/:userId" element={<MainPageAdmin/>}/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:role/:userId/books" element={<BookList booksList={books}/>}/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:role/:userId/users" element={<UserList users={users}/> }/>
