@@ -1,7 +1,7 @@
 // src/App.js
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import BookList from './Book/BookList';
 import AddBook from './Book/AddBook';
 import EditBook from './Book/EditBook';
@@ -22,7 +22,7 @@ import AddRole from "./Role/AddRole";
 import DeleteRole from "./Role/DeleteRole";
 import RoleDetail from "./Role/RoleDetail";
 import RoleEdit from "./Role/RoleEdit";
-import MainPageUser from "./Menu/MainPageUser";
+import {useNavigate, useParams} from "react-router-dom";import MainPageUser from "./Menu/MainPageUser";
 
 const App = () => {
     const [books, setBooks] = useState([]);
@@ -112,7 +112,8 @@ const App = () => {
         <Router>
             <div>
                 <h1>Bookstore</h1>
-                <Routes basenam="/bookstore">
+                <Routes basename="/bookstore">
+                    <Route path="/" element={<Navigate to="/bookstore" />} />
                     <Route path="/bookstore" element={<LoginUser/>}/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:role/:userId" element={<MainPageAdmin/>}/>
                     <Route path="https://bookstorefront.liara.run/bookstore/:role/:userId/books" element={<BookList booksList={books}/>}/>
