@@ -19,7 +19,7 @@ const AddRole = ({onRoleAdded}) => {
                 console.log('Role added!', response.data);
                 onRoleAdded(response.data);  // Call the callback with the new book
                setRoleName('');
-                navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}/roles`);
+                navigate(`/bookstore/${role}/${userId}/roles`);
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);
@@ -36,7 +36,7 @@ const AddRole = ({onRoleAdded}) => {
                 </div>
             
                 <button type="submit">Add Role</button>
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}/roles`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/${userId}/roles`)}>Cancel</button>
             </form>
         </div>
     );

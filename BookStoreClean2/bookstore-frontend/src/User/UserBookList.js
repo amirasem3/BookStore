@@ -25,11 +25,11 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
                 console.log('User library updated!', response.data);
                 onUserLibraryUpdated(response.data);
                 if (role.includes("Admin")){
-                    navigate(`https://bookstorefront.liara.run/bookstore/${role}/users/edit/${id}`);
+                    navigate(`/bookstore/${role}/users/edit/${id}`);
                 }
                 else {
 
-                    navigate(`https://bookstorefront.liara.run/bookstore/${role}/users/${id}/detail/${id}`);
+                    navigate(`/bookstore/${role}/users/${id}/detail/${id}`);
                 }
             })
             .catch(error => {
@@ -59,14 +59,14 @@ const UserBookList = ({ booksList, onUserLibraryUpdated }) => {
                             <button onClick={() => handleAddBook(book.id)}>Add</button>
                         </td>
                         <td>{book.id}</td>
-                        <td><Link to={`https://bookstorefront.liara.run/bookstore/${role}/books/detail/${book.id}`}>{book.title}</Link></td>
+                        <td><Link to={`/bookstore/${role}/books/detail/${book.id}`}>{book.title}</Link></td>
                         <td>{book.author}</td>
                         <td>{book.price}</td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-            <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/${id}`)}>Back to Main</button>
+            <button onClick={() => navigate(`/bookstore/${role}/${id}`)}>Back to Main</button>
         </div>
     );
 };

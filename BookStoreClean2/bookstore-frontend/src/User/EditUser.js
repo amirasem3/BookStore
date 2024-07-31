@@ -56,7 +56,7 @@ const EditUser = ({onUserUpdated}) => {
             .then(response => {
                 console.log('user updated!', response.data);
                 onUserUpdated(response.data);
-                navigate(`https://bookstorefront.liara.run/bookstore/${role}/${id}/users`);
+                navigate(`/bookstore/${role}/${id}/users`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -112,16 +112,16 @@ const EditUser = ({onUserUpdated}) => {
                                 <td>{book.title}</td>
                                 <td>{book.author}</td>
                                 <td>{book.price}</td>
-                                <td><Link to={`https://bookstorefront.liara.run/bookstore/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
+                                <td><Link to={`/bookstore/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
                                     From the Library</Link></td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 </div>
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${roleName}/users/addUserBook/${id}`)}>Add Books</button>
+                <button onClick={() => navigate(`/bookstore/${roleName}/users/addUserBook/${id}`)}>Add Books</button>
                 <button type="submit">Update User</button>
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${roleName}/users`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${roleName}/users`)}>Cancel</button>
             </form>
         </div>
     );

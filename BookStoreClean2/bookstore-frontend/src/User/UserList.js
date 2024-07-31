@@ -13,7 +13,7 @@ const UserList = ({ users }) => {
         return (
             <div>
                 <h2>Users List</h2>
-                <Link to={`https://bookstorefront.liara.run/bookstore/${role}/users/add`}>Add New user</Link>
+                <Link to={`/bookstore/${role}/users/add`}>Add New user</Link>
                 <table>
                     <thead>
                     <tr>
@@ -29,7 +29,7 @@ const UserList = ({ users }) => {
                     <tbody>
                     {users.map(user => (
                         <tr key={user.id}>
-                            <td><Link to={`https://bookstorefront.liara.run/bookstore/${role}/users/${user.id}/detail/${user.id}`}>{user.id}</Link></td>
+                            <td><Link to={`/bookstore/${role}/users/${user.id}/detail/${user.id}`}>{user.id}</Link></td>
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
                             <td>{user.username}</td>
@@ -37,9 +37,9 @@ const UserList = ({ users }) => {
                             <td>{user.email}</td>
                             <td>{user.roleName}</td>
                             <td>
-                                <Link to={`https://bookstorefront.liara.run/bookstore/${role}/users/edit/${user.id}`}>Edit</Link>
+                                <Link to={`/bookstore/${role}/users/edit/${user.id}`}>Edit</Link>
                                 <br/>
-                                <Link to={`https://bookstorefront.liara.run/bookstore/${role}/users/delete/${user.id}`}>Delete</Link>
+                                <Link to={`/bookstore/${role}/users/delete/${user.id}`}>Delete</Link>
 
                             </td>
                         </tr>
@@ -47,7 +47,7 @@ const UserList = ({ users }) => {
                     </tbody>
                 </table>
                
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}`)}>Back to Main</button>
+                <button onClick={() => navigate(`/bookstore/${role}/${userId}`)}>Back to Main</button>
             </div>
         );
     }
@@ -55,7 +55,7 @@ const UserList = ({ users }) => {
         return (
             <div>
                <h1>You Do Not Have Access To This Page!!</h1>
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}`)}>Back to Main</button>
+                <button onClick={() => navigate(`/bookstore/${role}`)}>Back to Main</button>
             </div>
         );
     }

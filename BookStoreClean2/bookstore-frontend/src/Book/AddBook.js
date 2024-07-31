@@ -26,7 +26,7 @@ const AddBook = ({ onBookAdded }) => {
                 setTitle('');
                 setAuthor('');
                 setPrice('');
-                navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}/books`);
+                navigate(`/bookstore/${role}/${userId}/books`);
             })
             .catch(error => {
                 console.error('There was an error adding the book!', error);
@@ -50,7 +50,7 @@ const AddBook = ({ onBookAdded }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Add Book</button>
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/${userId}/books`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/${userId}/books`)}>Cancel</button>
             </form>
         </div>
     );

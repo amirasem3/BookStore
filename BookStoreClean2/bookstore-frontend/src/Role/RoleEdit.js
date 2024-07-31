@@ -39,7 +39,7 @@ const RoleEdit = ({onRoleUpdated}) => {
 
 
 
-                navigate(`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles`);
+                navigate(`/bookstore/${rolePara}/${userId}/roles`);
 
             })
             .catch(error => {
@@ -58,7 +58,7 @@ const RoleEdit = ({onRoleUpdated}) => {
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} required/>
                 </div>
                 <button type="submit">Update Role</button>
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>Cancel</button>
             </form>
         </div>
     );

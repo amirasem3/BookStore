@@ -45,7 +45,7 @@ const AddUser = ({ onUserAdded , roles}) => {
                 setPassword('');
                 setRoleId('');
                 setUserId('');
-                navigate(`https://bookstorefront.liara.run/bookstore/${role}/${response.data.id}/users`);
+                navigate(`/bookstore/${role}/${response.data.id}/users`);
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);
@@ -92,7 +92,7 @@ const AddUser = ({ onUserAdded , roles}) => {
                     </select>
                 </div>
                 <button type="submit">Register</button>
-                <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${role}/users`)}>Cancel</button>
+                <button onClick={() => navigate(`/bookstore/${role}/users`)}>Cancel</button>
             </form>
         </div>
     );

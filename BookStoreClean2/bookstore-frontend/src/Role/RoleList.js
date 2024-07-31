@@ -12,7 +12,7 @@ const RoleList =  ({roles}) => {
     return (
         <div>
             <h2>Role List</h2>
-            <Link to={`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles/add`}>Add New Role</Link>
+            <Link to={`/bookstore/${rolePara}/${userId}/roles/add`}>Add New Role</Link>
             <table>
                 <thead>
                 <tr>
@@ -23,19 +23,19 @@ const RoleList =  ({roles}) => {
                 <tbody>
                 {roles.map(role => (
                     <tr key={role.id}>
-                        <td><Link to={`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles/detail/${role.id}`}>{role.id}</Link></td>
+                        <td><Link to={`/bookstore/${rolePara}/${userId}/roles/detail/${role.id}`}>{role.id}</Link></td>
                         <td>{role.name}</td>
                         <td>
-                            <Link to={`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles/edit/${role.id}`}>Edit</Link>
+                            <Link to={`/bookstore/${rolePara}/${userId}/roles/edit/${role.id}`}>Edit</Link>
                             <br/>
-                            <Link to={`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}/roles/delete/${role.id}`}>Delete</Link>
+                            <Link to={`/bookstore/${rolePara}/${userId}/roles/delete/${role.id}`}>Delete</Link>
 
                         </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-            <button onClick={() => navigate(`https://bookstorefront.liara.run/bookstore/${rolePara}/${userId}`)}>Back to Main</button>
+            <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}`)}>Back to Main</button>
         </div>
     );
 };
