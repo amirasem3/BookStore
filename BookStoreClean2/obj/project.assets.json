@@ -5468,19 +5468,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/asay/.nuget/packages/": {}
+    "C:\\Users\\AH.Yousefi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/asay/Project_dotnet/BookStore/BookStoreClean2/BookStoreClean2.csproj",
+      "projectUniqueName": "C:\\Projects\\BookStore\\BookStoreClean2\\BookStoreClean2.csproj",
       "projectName": "BookStoreClean2",
-      "projectPath": "/Users/asay/Project_dotnet/BookStore/BookStoreClean2/BookStoreClean2.csproj",
-      "packagesPath": "/Users/asay/.nuget/packages/",
-      "outputPath": "/Users/asay/Project_dotnet/BookStore/BookStoreClean2/obj/",
+      "projectPath": "C:\\Projects\\BookStore\\BookStoreClean2\\BookStoreClean2.csproj",
+      "packagesPath": "C:\\Users\\AH.Yousefi\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\BookStore\\BookStoreClean2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/asay/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\AH.Yousefi\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -5546,8 +5546,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\AH.Yousefi\\.dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Projects\\BookStore\\BookStoreClean2\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
