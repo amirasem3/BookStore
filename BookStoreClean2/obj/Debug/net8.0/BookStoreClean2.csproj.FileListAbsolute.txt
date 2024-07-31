@@ -290,3 +290,7 @@ C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.deps.
 C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.runtimeconfig.json
 C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\BookStoreClean2.staticwebassets.runtime.json
 C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\bookstore-frontend\liara.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\out\bookstore-frontend\liara.json
+C:\Projects\BookStore\BookStoreClean2\bin\Debug\net8.0\BookStoreClean2.xml
+C:\Projects\BookStore\BookStoreClean2\obj\Debug\net8.0\BookStoreClean2.xml

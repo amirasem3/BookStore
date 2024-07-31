@@ -5,10 +5,11 @@ using BookStoreClean2.ApplicationLayer.DTOs.UserBook;
 using BookStoreClean2.ApplicationLayer.Interfaces.User;
 using BookStoreClean2.ApplicationLayer.Interfaces.UserBook;
 using BookStoreClean2.CoreLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreClean2.Controllers.User;
-
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
@@ -114,7 +115,7 @@ public class UsersController : ControllerBase
         {
             return NotFound();
         }
-
+    
         return Ok(user);
             
     }

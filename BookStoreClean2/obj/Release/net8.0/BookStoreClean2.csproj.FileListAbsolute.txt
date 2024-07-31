@@ -267,3 +267,5 @@ C:\Projects\BookStore\BookStoreClean2\bin\Release\net8.0\out\bookstore-frontend\
 C:\Projects\BookStore\BookStoreClean2\bin\Release\net8.0\out\BookStoreClean2.deps.json
 C:\Projects\BookStore\BookStoreClean2\bin\Release\net8.0\out\BookStoreClean2.runtimeconfig.json
 C:\Projects\BookStore\BookStoreClean2\bin\Release\net8.0\out\BookStoreClean2.staticwebassets.runtime.json
+C:\Projects\BookStore\BookStoreClean2\out\bookstore-frontend\liara.json
+C:\Projects\BookStore\BookStoreClean2\out\Microsoft.AspNetCore.Authentication.JwtBearer.dll

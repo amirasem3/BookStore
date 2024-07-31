@@ -18,7 +18,7 @@ RUN dotnet restore
 COPY . .
 
 # Install EF Core tools (adjust the version as necessary)
-RUN dotnet tool install --global dotnet-ef
+#RUN dotnet tool install --global dotnet-ef
 
 # Ensure that the dotnet tools are available on the PATH
 ENV PATH="$PATH:/root/.dotnet/tools"

@@ -1,11 +1,12 @@
 ﻿
 using BookStoreClean.ApplicationLayer.Interfaces;
 using BookStoreClean2.ApplicationLayer.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreClean.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class BooksController : ControllerBase
@@ -40,7 +41,7 @@ public class BooksController : ControllerBase
 
             return Ok($"{title}'s ID : {bookId}");
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("AllBooks")]
         public async Task<IActionResult> GetAllBooks()
         {

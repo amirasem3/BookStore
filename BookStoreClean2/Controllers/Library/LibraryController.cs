@@ -1,8 +1,10 @@
 ﻿using BookStoreClean2.ApplicationLayer.DTOs.UserBook;
 using BookStoreClean2.ApplicationLayer.Interfaces.UserBook;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreClean2.Controllers.Library;
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class LibraryController : ControllerBase
