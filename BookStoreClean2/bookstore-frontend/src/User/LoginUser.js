@@ -27,11 +27,11 @@ const LoginUser = () => {
                 setRoleName(user.roleName);
                 setUser(user);
                 if (user.roleName.includes("Admin")){
-                    navigate(`/${user.roleName}/${user.id}`);    
+                    navigate(`${user.roleName}/${user.id}`);    
                 }
                 else {
 
-                    navigate(`/${user.roleName}/${user.id}`);
+                    navigate(`${user.roleName}/${user.id}`);
                 }
             })
             .catch(error => {
