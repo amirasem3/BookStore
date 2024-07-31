@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BookStoreClean2</name>
+    </assembly>
+    <members>
+        <member name="T:BookStoreClean2.Migrations.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.ChangeIdType">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeIdType.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeIdType.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeIdType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.AddUser">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.AddUserBookManyToMany">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddUserBookManyToMany.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddUserBookManyToMany.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddUserBookManyToMany.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.ChangeInBookAndUser">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeInBookAndUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeInBookAndUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeInBookAndUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.ChagenBookArrayType">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChagenBookArrayType.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChagenBookArrayType.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChagenBookArrayType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.ChangeUserBookToLibrary">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeUserBookToLibrary.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeUserBookToLibrary.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.ChangeUserBookToLibrary.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.AddRoleFieldToUser">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddRoleFieldToUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddRoleFieldToUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddRoleFieldToUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BookStoreClean2.Migrations.AddRoleAndFixUsers">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddRoleAndFixUsers.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddRoleAndFixUsers.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BookStoreClean2.Migrations.AddRoleAndFixUsers.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
