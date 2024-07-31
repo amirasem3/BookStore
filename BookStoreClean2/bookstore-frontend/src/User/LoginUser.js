@@ -41,7 +41,7 @@ const LoginUser = () => {
 
     return (
         <div>
-            <h2>Add a New Book</h2>
+            <h2>Welcome to Book Store</h2>
             <form onSubmit={handleSubmit}>
                
                 <div>
