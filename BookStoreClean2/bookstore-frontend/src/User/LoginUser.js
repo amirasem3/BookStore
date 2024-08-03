@@ -41,8 +41,6 @@ const LoginUser = () => {
 
     return (
         <div>
-            <h2>Welcome to Book Store</h2>
-            <Header/>
             <form onSubmit={handleSubmit}>
                
                 <div>

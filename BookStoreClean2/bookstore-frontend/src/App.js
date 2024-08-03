@@ -22,6 +22,7 @@ import AddRole from "./Role/AddRole";
 import DeleteRole from "./Role/DeleteRole";
 import RoleDetail from "./Role/RoleDetail";
 import RoleEdit from "./Role/RoleEdit";
+import Header from "./Component/Header";
 
 const App = () => {
    
@@ -110,7 +111,9 @@ const App = () => {
     return (
         <Router>
             <div>
+                <Header/>
                 <h1>Bookstore</h1>
+                <h3>Welcome to Bookstore</h3>
                 <Routes>
                     <Route path="/" element={<Navigate to="/bookstore" />} />
                     <Route path="/bookstore" element={<LoginUser />} />
