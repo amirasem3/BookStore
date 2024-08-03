@@ -2,9 +2,18 @@
 import './Header.css';
 
 const Header = () => {
+    
+    const user  = JSON.parse(localStorage.getItem('user'));
+    let roleName = "";
+    if (user!==null){
+        roleName = user.roleName + "Panel";
+    }
+    else{
+        roleName = ""
+    }
     return (
         <header className="header">
-            <div className="logo">Bookstore</div>
+            <div className="logo">Bookstore {roleName}</div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>

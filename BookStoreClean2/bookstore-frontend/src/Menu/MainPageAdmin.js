@@ -103,6 +103,14 @@ const MainPageAdmin = () => {
     const handleRoleDeleted = (deletedRoleId) => {
         setRoles((prevRoles) => prevRoles.filter((role) => role.id !== deletedRoleId));
     };
+    
+    const handleLogout = () =>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('roles');
+        localStorage.removeItem('books');
+        navigate(`/bookstore`)
+    }
 
     // if (!role || !role.includes("Admin")) {
     //     return <Navigate to="/bookstore" />;
@@ -111,8 +119,6 @@ const MainPageAdmin = () => {
     if(role.includes("Admin")){
         return (
             <div>
-                <h1>Bookstore</h1>
-                <h1>Welcome to Book Store</h1>
                 <strong>ROLE:</strong> {role}
                 <br />
                 <Link to={`/${role}/${userId}/books`}>Books</Link>
@@ -121,7 +127,7 @@ const MainPageAdmin = () => {
                 <br />
                 <Link to={`/${role}/${userId}/roles`}>Roles</Link>
                 <br />
-                <button onClick={() => navigate(`/bookstore`)}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
                 <Routes>
                     {/*<Route path="/:role/:userId/books" element={<BookList booksList={books} />} />*/}
                     <Route path="/users" element={<UserList users={users} />} />
@@ -148,7 +154,6 @@ const MainPageAdmin = () => {
     else {
         return (
             <div>
-                <h1>Welcome to Book Store</h1>
                 <strong>ROLE:</strong> {role}
                 <br/>
                 <Link to={`/${role}/${userId}/books`}>Books</Link>
@@ -156,7 +161,7 @@ const MainPageAdmin = () => {
 
                 <Link to={`/${role}/users/${userId}/detail/${userId}`}>Profile</Link>
                 <br/>
-                <button onClick={() => navigate(`/bookstore`)}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
                 <Routes>
                     {/*<Route path="/:role/:userId/books" element={<BookList booksList={books} />} />*/}
                     <Route path="/users" element={<UserList users={users}/>}/>
