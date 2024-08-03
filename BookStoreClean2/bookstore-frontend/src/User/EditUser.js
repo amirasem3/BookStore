@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useParams, useNavigate, Link} from 'react-router-dom';
 
-const EditUser = ({onUserUpdated}) => {
+const EditUser = () => {
     const {id} = useParams();
     const {role} = useParams();
     const [firstName, setFirstName] = useState('');
@@ -16,9 +16,14 @@ const EditUser = ({onUserUpdated}) => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [userBooks, setUserBooks] = useState([]);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 const user = response.data;
                 setFirstName(user.firstName);
@@ -52,11 +57,14 @@ const EditUser = ({onUserUpdated}) => {
 
         };
 
-        axios.put(`https://bookstoreclean.liara.run/api/users/UpdateUser`, updatedUser)
+        axios.put(`https://bookstoreclean.liara.run/api/users/UpdateUser`, updatedUser,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 console.log('user updated!', response.data);
-                onUserUpdated(response.data);
-                navigate(`/bookstore/${role}/${id}/users`);
+                navigate(`/${role}/${id}/users`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -112,16 +120,16 @@ const EditUser = ({onUserUpdated}) => {
                                 <td>{book.title}</td>
                                 <td>{book.author}</td>
                                 <td>{book.price}</td>
-                                <td><Link to={`/bookstore/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
+                                <td><Link to={`/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
                                     From the Library</Link></td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 </div>
-                <button onClick={() => navigate(`/bookstore/${roleName}/users/addUserBook/${id}`)}>Add Books</button>
+                <button onClick={() => navigate(`/${roleName}/users/addUserBook/${id}`)}>Add Books</button>
                 <button type="submit">Update User</button>
-                <button onClick={() => navigate(`/bookstore/${roleName}/users`)}>Cancel</button>
+                <button onClick={() => navigate(`/${roleName}/${id}/users`)}>Cancel</button>
             </form>
         </div>
     );

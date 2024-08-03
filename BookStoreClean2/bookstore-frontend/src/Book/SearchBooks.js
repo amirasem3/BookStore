@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 const SearchBooks = ({ onSearchResults }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const location = useLocation();
+    const token = localStorage.getItem('token');
 
     const fetchBooks = useCallback(
         debounce(async (term) => {
@@ -16,6 +17,9 @@ const SearchBooks = ({ onSearchResults }) => {
             try {
                 const response = await axios.get(url, {
                     params: term ? { searchTerm: term } : {},
+                    headers:{
+                        Authorization:'Bearer '+ token
+                    }
                 });
                 console.log('Search results:', response.data);
                 if (response.data != null) {

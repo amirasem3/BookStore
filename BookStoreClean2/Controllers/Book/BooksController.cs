@@ -41,7 +41,7 @@ public class BooksController : ControllerBase
 
             return Ok($"{title}'s ID : {bookId}");
         }
-        // [Authorize(Roles = "Admin")]
+       [Authorize]
         [HttpGet("AllBooks")]
         public async Task<IActionResult> GetAllBooks()
         {

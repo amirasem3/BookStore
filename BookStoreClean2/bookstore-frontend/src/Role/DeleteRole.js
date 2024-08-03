@@ -3,15 +3,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const DeleteRole = ({onRoleDeleted}) => {
+const DeleteRole = () => {
     const { id } = useParams();
     const {rolePara} = useParams();
     const navigate = useNavigate();
     const [role, setRole] = useState(null);
     const {userId} = useParams();
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/Role/GetRoleById?id=${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/Role/GetRoleById?id=${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 setRole(response.data);
             })
@@ -21,11 +26,14 @@ const DeleteRole = ({onRoleDeleted}) => {
     }, [id]);
 
     const handleDelete = () => {
-        axios.delete(`https://bookstoreclean.liara.run/api/Role/DeleteRole?roleId=${id}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/Role/DeleteRole?roleId=${id}`, {
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(() => {
                 console.log('Role deleted!');
-                onRoleDeleted(id);
-                navigate(`/bookstore/${rolePara}/${userId}/roles`);
+                navigate(`/${rolePara}/${userId}/roles`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -48,7 +56,7 @@ const DeleteRole = ({onRoleDeleted}) => {
             </div>
         
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>No</button>
+            <button onClick={() => navigate(`/${rolePara}/${userId}/roles`)}>No</button>
         </div>
     );
 };

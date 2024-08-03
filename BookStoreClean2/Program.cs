@@ -34,39 +34,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(options =>
     {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        // options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    // .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-    // {
-    //     options.LoginPath = "/Account/Login";
-    //     options.AccessDeniedPath = "/Account/AccessDenied";
-    // })
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
+            ValidIssuer = "AmirHosseinIssuer",
+            ValidAudience = "AmirHosseinAudience",
+            IssuerSigningKey = new SymmetricSecurityKey
+                (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
-            ValidateIssuerSigningKey = false,
-            ValidIssuer = "AmirHosseinIssuer",
-            ValidAudience = "AmirHosseinAudience",
-            IssuerSigningKey = new SymmetricSecurityKey("SuperSecretKeyForTestingPurposes123!"u8.ToArray()),
-            ClockSkew = TimeSpan.Zero
+            ValidateIssuerSigningKey = true,
         };
     });
-// builder.Services.AddControllers(config =>
-// {
-//     var policy = new AuthorizationPolicyBuilder()
-//         .RequireAuthenticatedUser()
-//         .Build();
-//     config.Filters.Add(new AuthorizeFilter(policy));
-// });
-builder.Services.AddAuthorizationBuilder()
-    // builder.Services.AddControllers(config =>// {//     var policy = new AuthorizationPolicyBuilder()//         .RequireAuthenticatedUser()//         .Build();//     config.Filters.Add(new AuthorizeFilter(policy));// });
-                                                                                                                                                                                                                               .AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore3")));
@@ -96,9 +82,6 @@ builder.Services.AddSwaggerGen(c =>
         Title = "Bookstore API",
         Description = "A simple example ASP.NET Core Web API"
     });
-    // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    // c.IncludeXmlComments(xmlPath);
     
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -106,7 +89,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Please enter into field the word 'Bearer' followed by a space and the JWT token",
         Name = "Authorization",
         Type = SecuritySchemeType.Http,
-        Scheme = "bearer"
+        Scheme = "Bearer"
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -122,32 +105,6 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
-    
-    // //Define the 401 response schema
-    // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    // {
-    //     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-    //     Name = "Authorization",
-    //     In = ParameterLocation.Header,
-    //     Type = SecuritySchemeType.Http,
-    //     Scheme = "bearer"
-    // });
-    //
-    // c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    // {
-    //     {
-    //         new OpenApiSecurityScheme
-    //         {
-    //             Reference = new OpenApiReference
-    //             {
-    //                 Type = ReferenceType.SecurityScheme,
-    //                 Id = "Bearer"
-    //             }
-    //         },
-    //         new List<string>()
-    //     }
-    // });
-    // c.OperationFilter<UnathorizedResponseOperationFilter>();
 });
 //Add repositories and Services
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -190,7 +147,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty; // Serve the Swagger UI at the app's root
 });
 
-app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
+// app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
@@ -200,16 +157,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers();
+    endpoints.MapControllers().RequireAuthorization();
     endpoints.MapFallbackToFile("index.html"); // Serve React app for unknown routes
 });
-// app.UseEndpoints(endpoint =>
-// {
-//     endpoint.MapFallbackToFile("BookStoreClean2/bookstore-frontend/public/index.html");
-// });
 
 
-
-// app.MapControllers();
 
 app.Run();

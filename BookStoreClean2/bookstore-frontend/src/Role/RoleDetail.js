@@ -9,9 +9,14 @@ const RoleDetail = () => {
     const navigate = useNavigate();
     const [role, setRole] = useState(null);
     const {userId}  = useParams();
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/Role/GetRoleById?id=${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/Role/GetRoleById?id=${id}`, {
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 setRole(response.data);
             })
@@ -32,7 +37,7 @@ const RoleDetail = () => {
             </div>
             
 
-            <button onClick={() => navigate(`/bookstore/${rolePara}/${userId}/roles`)}>Back to list</button>
+            <button onClick={() => navigate(`/${rolePara}/${userId}/roles`)}>Back to list</button>
         </div>
     );
 };

@@ -10,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace BookStoreClean2.Controllers.Account;
-[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class AccountController : ControllerBase
@@ -32,22 +31,33 @@ public class AccountController : ControllerBase
         {
             return Unauthorized();
         }
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = "SuperSecretKeyForTestingPurposes123!"u8.ToArray(); // Replace with your secret key
+
+        const string issuer = "AmirHosseinIssuer";
+        const string audience = "AmirHosseinAudience";
+        var key = Encoding.ASCII.GetBytes("This is a sample secret key - please don't use in production environment.");
+      
+        // var key = "SuperSecretKeyForTestingPurposes123!"u8.ToArray(); // Replace with your secret key
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id), new Claim(ClaimTypes.Role, "Admin") }),
-            Expires = DateTime.UnixEpoch.AddHours(1),
+            Subject = new ClaimsIdentity(new[]
+            {
+                // new Claim("Id",user.Id),
+               new Claim(ClaimTypes.Name, loginModel.Username)
+            }),
+            Expires = DateTime.UtcNow.AddHours(1),
+            Issuer = issuer,
+            Audience = audience,
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
+        var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
+        var jwtToken = tokenHandler.WriteToken(token);
         var tokenString = tokenHandler.WriteToken(token);
 
         return Ok(new
         {
-            Token = tokenString,
-            Expires = token.ValidTo,
-            TokenType = "Bearer"
+            token=tokenString,
+            user
         });
         // var claims = new[]
         // {

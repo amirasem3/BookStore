@@ -3,14 +3,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const DeleteUser = ({onUserDeleted}) => {
+const DeleteUser = () => {
     const { id } = useParams();
     const {role} = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 setUser(response.data);
             })
@@ -20,11 +25,14 @@ const DeleteUser = ({onUserDeleted}) => {
     }, [id]);
 
     const handleDelete = () => {
-        axios.delete(`https://bookstoreclean.liara.run/api/users/RemoveUser?id=${id}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/users/RemoveUser?id=${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(() => {
                 console.log('Book deleted!');
-                onUserDeleted(id);
-                navigate(`/bookstore/${role}/${id}/users`);
+                navigate(`/${role}/${id}/users`);
             })
             .catch(error => {
                 console.error('There was an error deleting the User!', error);
@@ -55,7 +63,7 @@ const DeleteUser = ({onUserDeleted}) => {
                 <strong>Phone Number</strong> {user.phoneNumber}
             </div>
             <button onClick={() => handleDelete()}>Yes</button>
-            <button onClick={() => navigate(`/bookstore/${role}/users`)}>No</button>
+            <button onClick={() => navigate(`/${role}/users`)}>No</button>
         </div>
     );
 };

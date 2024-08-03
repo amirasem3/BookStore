@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
-const EditUserLibrary = ({onUserDeleted}) => {
+const EditUserLibrary = () => {
     const location = useLocation();
     const { id } = useParams();
     const {role} = useParams();
@@ -11,9 +11,14 @@ const EditUserLibrary = ({onUserDeleted}) => {
     const params = new URLSearchParams(location.search);
     const bookId = params.get('BOOK_ID');
     const userId = params.get('USER_ID');
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${bookId}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${bookId}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 setUser(response.data);
             })
@@ -30,15 +35,19 @@ const EditUserLibrary = ({onUserDeleted}) => {
         };
 
        
-        axios.delete(`https://bookstoreclean.liara.run/api/Library/RemoveBookFromLibrary?UserId=${userId}&BookId=${bookId}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/Library/RemoveBookFromLibrary?UserId=${userId}&BookId=${bookId}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(() => {
                 console.log('Book deleted!');
                 if (role.includes("Admin")){
 
-                    navigate(`/bookstore/${role}/users/edit/${userId}`);
+                    navigate(`/${role}/users/edit/${userId}`);
                 }
                 else {
-                    navigate(`/bookstore/${role}/users/${userId}/detail/${userId}`)
+                    navigate(`/${role}/users/${userId}/detail/${userId}`)
                 }
             })
             .catch(error => {
@@ -66,8 +75,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
                 </div>
 
                 <button onClick={() => handleDelete()}>Yes</button>
-                /bookstore/:role/users/:userId/detail/:id
-                <button onClick={() => navigate(`/bookstore/${role}/users/edit/${userId}`)}>No</button>
+                <button onClick={() => navigate(`/${role}/users/edit/${userId}`)}>No</button>
             </div>
         );
     }
@@ -88,7 +96,7 @@ const EditUserLibrary = ({onUserDeleted}) => {
                 </div>
 
                 <button onClick={() => handleDelete()}>Yes</button>
-                <button onClick={() => navigate(`/bookstore/${role}/users/${userId}/detail/${userId}`)}>No</button>
+                <button onClick={() => navigate(`/${role}/users/${userId}/detail/${userId}`)}>No</button>
             </div>
         );
     }

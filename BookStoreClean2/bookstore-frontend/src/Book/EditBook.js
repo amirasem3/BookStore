@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const EditBook = ({ onBookUpdated }) => {
+const EditBook = () => {
     const { id } = useParams();
     const {role} = useParams();
     const navigate = useNavigate();
@@ -12,8 +12,14 @@ const EditBook = ({ onBookUpdated }) => {
     const [price, setPrice] = useState('');
     const [error, setError] = useState(null);
     const {userId} = useParams();
+    const token = localStorage.getItem('token');
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+
+        })
             .then(response => {
                 const book = response.data;
                 setTitle(book.title);
@@ -37,11 +43,14 @@ const EditBook = ({ onBookUpdated }) => {
             price: parseFloat(price)
         };
 
-        axios.put(`https://bookstoreclean.liara.run/api/books/UpdateBook/${id}`, updatedBook)
+        axios.put(`https://bookstoreclean.liara.run/api/books/UpdateBook/${id}`, updatedBook,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 console.log('Book updated!', response.data);
-                onBookUpdated(response.data);
-                navigate(`/bookstore/${role}/${userId}/books`);
+                navigate(`/${role}/${userId}/books`);
             })
             .catch(error => {
                 console.error('There was an error updating the book!', error);
@@ -66,7 +75,7 @@ const EditBook = ({ onBookUpdated }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Update Book</button>
-                <button onClick={() => navigate(`/bookstore/${role}/${userId}/books`)}>Cancel</button>
+                <button onClick={() => navigate(`/${role}/${userId}/books`)}>Cancel</button>
             </form>
         </div>
     );

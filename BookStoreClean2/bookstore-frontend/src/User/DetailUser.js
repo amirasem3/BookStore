@@ -9,9 +9,14 @@ const DetailUser = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const {userId} = useParams();
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 setUser(response.data);
             })
@@ -75,7 +80,7 @@ const DetailUser = () => {
                     </table>
                 </div>
 
-                <button onClick={() => navigate(`/bookstore/${role}/users`)}>Back to list</button>
+                <button onClick={() => navigate(`/${role}/${userId}/users`)}>Back to list</button>
             </div>
         );
     }
@@ -128,7 +133,7 @@ const DetailUser = () => {
                                 <td>{book.author}</td>
                                 <td>{book.price}</td>
                                 <td><Link
-                                    to={`/bookstore/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
+                                    to={`/${role}/users/library/remove?BOOK_ID=${book.id}&USER_ID=${id}`}>Remove
                                     From the Library</Link></td>
                             </tr>
                         ))}
@@ -137,7 +142,7 @@ const DetailUser = () => {
                 </div>
 
                 <button onClick={() => navigate(`/bookstore/${role}/${userId}`)}>Back To Main</button>
-                <button onClick={() => navigate(`/bookstore/${role}/users/addUserBook/${id}`)}>Add Books</button>
+                <button onClick={() => navigate(`/${role}/users/addUserBook/${id}`)}>Add Books</button>
             </div>
         );
     }

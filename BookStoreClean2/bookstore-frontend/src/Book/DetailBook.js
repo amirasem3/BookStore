@@ -9,9 +9,14 @@ const DetailBook = () => {
     const {userId}  = useParams();
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
+    const token  = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 setBook(response.data);
             })
@@ -40,7 +45,7 @@ const DetailBook = () => {
                 <strong>Price:</strong> {book.price}
             </div>
             
-            <button onClick={()=> navigate(`/bookstore/${role}/${userId}/books`)}>Back to list</button>
+            <button onClick={()=> navigate(`/${role}/${userId}/books`)}>Back to list</button>
         </div>
     );
 };

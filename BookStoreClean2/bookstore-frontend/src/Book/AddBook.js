@@ -3,13 +3,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {useNavigate, useParams} from "react-router-dom";
 
-const AddBook = ({ onBookAdded }) => {
+const AddBook = () => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [price, setPrice] = useState('');
     const navigate = useNavigate();
     const {role} = useParams();
-    const {userId} = useParams();
+    const {userId} = useParams()
+    const token = localStorage.getItem('token');
+    const books = JSON.parse(localStorage.getItem('books'));
+    const [myBooks, setBooks] = useState([]);
+    
+    // const handleBookAdded = (newBook) => {
+    //     setBooks(prevBooks => [...prevBooks, newBook]);
+    // };
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -19,14 +26,18 @@ const AddBook = ({ onBookAdded }) => {
             price: parseFloat(price)
         };
 
-        axios.post('https://bookstoreclean.liara.run/api/books/AddBook', newBook)
+        axios.post('https://bookstoreclean.liara.run/api/books/AddBook', newBook,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 console.log('Book added!', response.data);
-                onBookAdded(response.data);  // Call the callback with the new book
+                // handleBookAdded(response.data);  // Call the callback with the new book
                 setTitle('');
                 setAuthor('');
                 setPrice('');
-                navigate(`/bookstore/${role}/${userId}/books`);
+                navigate(`/${role}/${userId}/books`);
             })
             .catch(error => {
                 console.error('There was an error adding the book!', error);
@@ -50,7 +61,7 @@ const AddBook = ({ onBookAdded }) => {
                     <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
                 </div>
                 <button type="submit">Add Book</button>
-                <button onClick={() => navigate(`/bookstore/${role}/${userId}/books`)}>Cancel</button>
+                <button onClick={() => navigate(`/${role}/${userId}/books`)}>Cancel</button>
             </form>
         </div>
     );

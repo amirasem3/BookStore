@@ -9,9 +9,15 @@ const DeleteBook = ({onBookDeleted}) => {
     const {userId} = useParams();
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
+    const token = localStorage.getItem('token');
+    const [myBooks, setBooks] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`)
+        axios.get(`https://bookstoreclean.liara.run/api/books/GetBookById/${id}`,{
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 setBook(response.data);
             })
@@ -20,12 +26,20 @@ const DeleteBook = ({onBookDeleted}) => {
             });
     }, [id]);
 
+
+    // const handleBookDeleted = (deletedBookId) => {
+    //     setBooks(prevBooks => prevBooks.filter(book => book.id !== deletedBookId));
+    // };
     const handleDelete = () => {
-        axios.delete(`https://bookstoreclean.liara.run/api/books/DeleteBook/${id}`)
+        axios.delete(`https://bookstoreclean.liara.run/api/books/DeleteBook/${id}`, {
+            headers:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(() => {
                 console.log('Book deleted!');
-                onBookDeleted(id);
-                navigate(`/bookstore/${role}/${userId}/books`);
+                // handleBookDeleted(id);
+                navigate(`/${role}/${userId}/books`);
             })
             .catch(error => {
                 console.error('There was an error deleting the book!', error);
@@ -50,7 +64,7 @@ const DeleteBook = ({onBookDeleted}) => {
                     <strong>Price:</strong> {book.price}
                 </div>
                 <button onClick={()=> handleDelete()}>Yes</button>
-                <button onClick={()=> navigate(`/bookstore/${role}/${userId}/books`)}>No</button>
+                <button onClick={()=> navigate(`/${role}/${userId}/books`)}>No</button>
         </div>
     );
 };

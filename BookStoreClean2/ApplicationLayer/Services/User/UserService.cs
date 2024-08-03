@@ -166,6 +166,7 @@ public class UserService : IUserService
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
         var role = await _roleRepository.GetRoleByIdAsync(user.RoleId);
+        var books = await _libraryRepository.GetBooksByUserIdAsync(user.Id);
         if (user == null)
         {
             return null;
@@ -182,7 +183,19 @@ public class UserService : IUserService
             Id = user.Id,
             Username = user.Username,
             PasswordHash = user.PasswordHash,
-            RoleName = role.Name
+            RoleName = role.Name,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber,
+            Books =  books.Select(book => new BookDto
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author,
+                Price = book.Price
+
+            }).ToList(),
         };
     }
 

@@ -22,7 +22,7 @@ public class CustomUnauthorizedResponseMiddleware
                 type = "https://tools.ietf.org/html/rfc9110#section-15.5.2",
                 title = "Unauthorized",
                 status = 401,
-                traceId = context.TraceIdentifier
+                traceId = context.TraceIdentifier,
             };
 
             context.Response.ContentType = "application/json";

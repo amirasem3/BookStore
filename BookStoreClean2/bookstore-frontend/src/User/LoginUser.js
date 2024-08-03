@@ -19,21 +19,20 @@ const LoginUser = () => {
             password
         };
 
-        axios.post('https://bookstoreclean.liara.run/api/users/Login', newBook)
+        axios.post(`https://bookstoreclean.liara.run/Account/login?Username=${username}&Password=${password}`)
             .then(response => {
-                const user = response.data;
+                const user = response.data.user;
+                const token = response.data.token;
                 console.log('User Logged In!', user.username);
+                console.log('Generated Token:', token);
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(user));
                 setUsername(user.username);
                 setPassword(user.password);
                 setRoleName(user.roleName);
                 setUser(user);
-                if (user.roleName.includes("Admin")){
-                    navigate(`${user.roleName}/${user.id}`);    
-                }
-                else {
-
-                    navigate(`${user.roleName}/${user.id}`);
-                }
+                    navigate(`/bookstore/${user.roleName}/${user.id}`);    
+                
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);

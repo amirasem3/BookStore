@@ -5,21 +5,25 @@ import axios from 'axios';
 import {useNavigate, useParams} from "react-router-dom";
 
 
-const AddRole = ({onRoleAdded}) => {
+const AddRole = () => {
     const [roleName, setRoleName] = useState('');
     const navigate = useNavigate();
     const {role} = useParams();
     const {userId} = useParams();
+    const token = localStorage.getItem('token');
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post(`https://bookstoreclean.liara.run/api/Role/CreateRole?roleName=${roleName}`)
+        axios.post(`https://bookstoreclean.liara.run/api/Role/CreateRole?roleName=${roleName}`,{
+            header:{
+                Authorization:'Bearer ' + token
+            }
+        })
             .then(response => {
                 console.log('Role added!', response.data);
-                onRoleAdded(response.data);  // Call the callback with the new book
                setRoleName('');
-                navigate(`/bookstore/${role}/${userId}/roles`);
+                navigate(`/${role}/${userId}/roles`);
             })
             .catch(error => {
                 console.error('There was an error adding the User!', error);
@@ -36,7 +40,7 @@ const AddRole = ({onRoleAdded}) => {
                 </div>
             
                 <button type="submit">Add Role</button>
-                <button onClick={() => navigate(`/bookstore/${role}/${userId}/roles`)}>Cancel</button>
+                <button onClick={() => navigate(`/${role}/${userId}/roles`)}>Cancel</button>
             </form>
         </div>
     );
