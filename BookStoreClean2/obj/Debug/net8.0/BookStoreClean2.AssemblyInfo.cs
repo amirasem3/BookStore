@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookStoreClean2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+637d44a98ea77fbcb106b92b89fcbd3e765ef679")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdd83bbcaf245e6969b371863b191c60eace3557")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookStoreClean2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookStoreClean2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

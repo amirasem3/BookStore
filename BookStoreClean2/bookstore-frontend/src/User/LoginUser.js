@@ -20,7 +20,9 @@ const LoginUser = () => {
         };
 
         axios.post(`https://bookstoreclean.liara.run/Account/LoginApi?Username=${username}&Password=${password}`)
-            .then(response => {
+            .then(response =>
+            {
+                
                 const user = response.data.user;
                 const token = response.data.token;
                 console.log('User Logged In!', user.username);

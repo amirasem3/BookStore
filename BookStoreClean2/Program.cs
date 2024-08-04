@@ -62,7 +62,7 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore3")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Bookstore3")));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
@@ -210,7 +210,8 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger"; // Serve the Swagger UI at the app's root
 });
 
-// app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
+app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
+
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
@@ -220,7 +221,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
-app.MapFallbackToFile("index.html"); // For serving your Swagger UI if it's an SPA
+// app.MapFallbackToFile("index.html"); // For serving your Swagger UI if it's an SPA
 // app.MapControllers().RequireAuthorization();
 // app.UseEndpoints(endpoints =>
 // {

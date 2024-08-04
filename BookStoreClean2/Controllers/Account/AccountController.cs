@@ -83,12 +83,12 @@ public class AccountController : ControllerBase
         // Response.Cookies.Append("BookstoreCookie", tokenString, cookieOptions);
 
 
-        return Ok(tokenString);
-        // return Ok(new
-        // {
-        //     token=tokenString,
-        //     user
-        // });
+        // return Ok(tokenString);
+        return Ok(new
+        {
+            token=tokenString,
+            user
+        });
 
         // return Redirect("/swagger/index.html");
         // var claims = new[]
