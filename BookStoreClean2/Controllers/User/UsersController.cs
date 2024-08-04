@@ -5,11 +5,14 @@ using BookStoreClean2.ApplicationLayer.DTOs.UserBook;
 using BookStoreClean2.ApplicationLayer.Interfaces.User;
 using BookStoreClean2.ApplicationLayer.Interfaces.UserBook;
 using BookStoreClean2.CoreLayer.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreClean2.Controllers.User;
 // [Authorize]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase

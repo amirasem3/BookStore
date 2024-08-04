@@ -1,12 +1,14 @@
 ﻿using BookStoreClean2.ApplicationLayer.DTOs.Role;
 using BookStoreClean2.ApplicationLayer.Interfaces.Role;
 using BookStoreClean2.ApplicationLayer.Services.Role;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreClean2.Controllers.Role;
-
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 // [Authorize]
 [ApiController]
 [Route("api/[controller]")]
