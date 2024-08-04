@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+<h2>Login</h2>
+<form id="loginForm">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter your username">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your password">
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+
+<script>
+    // Attach a submit event listener to the form
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Get form data
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            // Send the login request to the server
+            const response = await fetch(`/Account/LoginApi?Username=${username}&Password=${password}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            if (response.ok) {
+                // Handle successful login
+                alert('Login successful!');
+                window.location.href = '/swagger/index.html'; // Redirect to a dashboard or another page
+            } else {
+                // Handle errors
+                const errorData = await response.json();
+                alert('Login failed: ' + (errorData.message || response.statusText));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred during login.');
+        }
+    });
+</script>
+</body>
+</html>

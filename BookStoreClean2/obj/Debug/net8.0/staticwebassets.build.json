@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5ksQpWa0SLEXikgrPbd6416ycrIREQEOVd/xwzEdzPw=",
+  "Hash": "TNiUBMPmrPlINJJM7t3NDfSBTAyvEFAGTBO+/Gx2Gc8=",
   "Source": "BookStoreClean2",
   "BasePath": "_content/BookStoreClean2",
   "Mode": "Default",
@@ -1155,6 +1155,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Projects\\BookStore\\BookStoreClean2\\wwwroot\\login.html",
+      "SourceId": "BookStoreClean2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projects\\BookStore\\BookStoreClean2\\wwwroot\\",
+      "BasePath": "_content/BookStoreClean2",
+      "RelativePath": "login.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\login.html"
     }
   ]
 }

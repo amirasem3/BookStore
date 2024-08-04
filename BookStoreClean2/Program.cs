@@ -11,6 +11,7 @@ using BookStoreClean2.ApplicationLayer.Interfaces.UserBook;
 using BookStoreClean2.ApplicationLayer.Services.Role;
 using BookStoreClean2.ApplicationLayer.Services.User;
 using BookStoreClean2.ApplicationLayer.Services.UserBook;
+using BookStoreClean2.Auth;
 using BookStoreClean2.CoreLayer.Entities;
 using BookStoreClean2.CoreLayer.Interfaces;
 using BookStoreClean2.CoreLayer.Interfaces.Role;
@@ -18,6 +19,7 @@ using BookStoreClean2.CoreLayer.Interfaces.UserBook;
 using BookStoreClean2.InfrastructureLayer.Repositories.Role;
 using BookStoreClean2.InfrastructureLayer.Repositories.UserBook;
 using BookStoreClean2.Middleware;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -32,6 +34,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
+builder.Services.AddRazorPages();
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
@@ -51,6 +55,9 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
         };
+    }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+    {
+       
     });
 
 
@@ -82,29 +89,84 @@ builder.Services.AddSwaggerGen(c =>
         Title = "Bookstore API",
         Description = "A simple example ASP.NET Core Web API"
     });
+    // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    // {
+    //     Name = "Authorization",
+    //     Type = SecuritySchemeType.Http,
+    //     Scheme = "Bearer",
+    //     BearerFormat = "JWT",
+    //     In = ParameterLocation.Header,
+    //     Description = "JWT Authorization header using the Bearer scheme."
+    // });
+
+    // Add security requirement for JWT Bearer
+    // c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    // {
+    //     {
+    //         new OpenApiSecurityScheme
+    //         {
+    //             Reference = new OpenApiReference
+    //             {
+    //                 Type = ReferenceType.SecurityScheme,
+    //                 Id = "Bearer"
+    //             }
+    //         },
+    //         Array.Empty<string>()
+    //     }
+    // });
+    // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    // {
+    //     Name = "Authorization",
+    //     Type = SecuritySchemeType.Http,
+    //     Scheme = "Bearer",
+    //     BearerFormat = "JWT",
+    //     In = ParameterLocation.Header,
+    //     Description = "JWT Authorization header using the Bearer scheme."
+    // });
+
+    // c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    // {
+    //     {
+    //         new OpenApiSecurityScheme
+    //         {
+    //             Reference = new OpenApiReference
+    //             {
+    //                 Type = ReferenceType.SecurityScheme,
+    //                 Id = "Bearer"
+    //             }
+    //         },
+    //         Array.Empty<string>()
+    //     }
+    // });
     
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please enter into field the word 'Bearer' followed by a space and the JWT token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "Bearer"
-    });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+    // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    // {
+    //     In = ParameterLocation.Header,
+    //     Description = "Please enter into field the word 'Bearer' followed by a space and the JWT token",
+    //     Name = "Authorization",
+    //     Type = SecuritySchemeType.Http,
+    //     Scheme = "Bearer"
+    // });
+    // c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    // {
+    //     {
+    //         new OpenApiSecurityScheme
+    //         {
+    //             Reference = new OpenApiReference
+    //             {
+    //                 Type = ReferenceType.SecurityScheme,
+    //                 Id = "Bearer"
+    //             }
+    //         },
+    //         Array.Empty<string>()
+    //     }
+    // });
+    // Define JWT Bearer scheme
+    
+    // c.OperationFilter<AddAuthHandlerOperationFilter>();
+    // c.OperationFilter<AddJwtTokenHandlerOperationFilter>();
+    
+    
 });
 //Add repositories and Services
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -136,6 +198,7 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName=="Docker"
     app.UseDeveloperExceptionPage();
 }
 
+
 // Enable middleware to serve generated Swagger as a JSON endpoint.
 app.UseSwagger();
 
@@ -144,7 +207,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bookstore API V1");
-    c.RoutePrefix = string.Empty; // Serve the Swagger UI at the app's root
+    c.RoutePrefix = "swagger"; // Serve the Swagger UI at the app's root
 });
 
 // app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();
@@ -155,11 +218,15 @@ app.UseCors("AllowReactApp");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers().RequireAuthorization();
-    endpoints.MapFallbackToFile("index.html"); // Serve React app for unknown routes
-});
+app.MapRazorPages();
+app.MapControllers();
+app.MapFallbackToFile("index.html"); // For serving your Swagger UI if it's an SPA
+// app.MapControllers().RequireAuthorization();
+// app.UseEndpoints(endpoints =>
+// {
+//     endpoints.MapControllers().RequireAuthorization();
+//     endpoints.MapFallbackToFile("index.html"); // Serve React app for unknown routes
+// });
 
 
 

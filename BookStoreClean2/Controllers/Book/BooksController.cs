@@ -1,12 +1,15 @@
 ﻿
 using BookStoreClean.ApplicationLayer.Interfaces;
 using BookStoreClean2.ApplicationLayer.DTOs;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreClean.Controllers;
-// [Authorize]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
+
 [ApiController]
 [Route("api/[controller]")]
 public class BooksController : ControllerBase
@@ -41,7 +44,7 @@ public class BooksController : ControllerBase
 
             return Ok($"{title}'s ID : {bookId}");
         }
-       [Authorize]
+    
         [HttpGet("AllBooks")]
         public async Task<IActionResult> GetAllBooks()
         {
