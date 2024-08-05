@@ -80,35 +80,16 @@ public class AccountController : ControllerBase
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddHours(1)
         };
-        // Response.Cookies.Append("BookstoreCookie", tokenString, cookieOptions);
-
-
-        // return Ok(tokenString);
+        
         return Ok(new
         {
             token=tokenString,
-            user
+            user,
+            // Cookie = Request.Cookies[".AspNetCore.Cookies"] //if you want to return a cookie
         });
-
-        // return Redirect("/swagger/index.html");
-        // var claims = new[]
-        // {
-        //     new Claim(JwtRegisteredClaimNames.Sub, loginModel.Username),
-        //     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        // };
-        //
-        // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:key"]));
-        // var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        //
-        // var token = new JwtSecurityToken(
-        //     issuer: _configuration["Jwt:Issuer"],
-        //     audience: _configuration["Jwt:Audience"],
-        //     claims: claims,
-        //     expires: DateTime.Now.AddMinutes(60),
-        //     signingCredentials: creds
-        // );
-        //
-        // return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+        
 
     }
+    
+    
 }

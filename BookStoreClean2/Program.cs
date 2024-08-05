@@ -68,7 +68,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         builder =>
         {
-            builder.WithOrigins("https://bookfront.liara.run", "http://localhost:3000")
+            builder.WithOrigins("https://bookfront.liara.run", "http://localhost:3000", "https://ahasemyosuefi.ir")
                 .AllowAnyHeader()
                 .AllowCredentials()
                 .AllowAnyMethod();
@@ -207,7 +207,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bookstore API V1");
-    c.RoutePrefix = "swagger"; // Serve the Swagger UI at the app's root
+    c.RoutePrefix = string.Empty; // Serve the Swagger UI at the app's root
 });
 
 app.UseMiddleware<CustomUnauthorizedResponseMiddleware>();

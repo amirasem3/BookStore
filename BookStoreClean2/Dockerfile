@@ -1,10 +1,10 @@
-﻿# Stage 0: Build React app
-FROM node:18 AS frontend-build
-WORKDIR /app
-COPY bookstore-frontend/package*.json ./
-RUN npm install
-COPY bookstore-frontend/ ./
-RUN npm run build
+﻿## Stage 0: Build React app
+#FROM node:18 AS frontend-build
+#WORKDIR /app
+#COPY bookstore-frontend/package*.json ./
+#RUN npm install
+#COPY bookstore-frontend/ ./
+#RUN npm run build
 
 # Stage 1: Build the .NET application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
