@@ -11,7 +11,9 @@ const RoleList =  () => {
     const {userId} = useParams();
     const [roles, setRoles]  = useState([]);
     const token  = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
     const rolesJson = JSON.stringify(roles);
+    console.log("User = ", user.roleName);
     localStorage.setItem('roles', rolesJson);
     useEffect(() => {
         fetchRoles();
@@ -34,7 +36,7 @@ const RoleList =  () => {
     return (
         <div>
             <h2>Role List</h2>
-            <Link to={`/${rolePara}/${userId}/roles/add`}>Add New Role</Link>
+            <Link to={`/${user.roleName}/${user.id}/roles/add`}>Add New Role</Link>
             <table>
                 <thead>
                 <tr>

@@ -57,7 +57,6 @@ builder.Services.AddAuthentication(options =>
         };
     }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
     {
-       
     });
 
 
@@ -68,7 +67,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         builder =>
         {
-            builder.WithOrigins("https://bookfront.liara.run", "http://localhost:3000", "https://ahasemyosuefi.ir")
+            builder.WithOrigins("http://localhost:3000", "https://ahasemyosuefi.ir")
                 .AllowAnyHeader()
                 .AllowCredentials()
                 .AllowAnyMethod();

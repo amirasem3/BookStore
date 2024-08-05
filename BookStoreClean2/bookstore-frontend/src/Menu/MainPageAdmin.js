@@ -142,10 +142,11 @@ const MainPageAdmin = () => {
                     <Route path="/users/:userId/detail/:id" element={<DetailUser />} />
                     <Route path="/users/addUserBook/:id" element={<UserBookList booksList={books} onUserLibraryUpdated={handleUserUpdated} />} />
                     <Route path="/users/library/remove" element={<EditUserLibrary />} />
-                    <Route path="/roles/add" element={<AddRole onRoleAdded={handleRoleAdded} />} />
-                    <Route path="/roles/delete/:id" element={<DeleteRole onRoleDeleted={handleRoleDeleted} />} />
-                    <Route path="/roles/detail/:id" element={<RoleDetail />} />
-                    <Route path="/roles/edit/:id" element={<RoleEdit onRoleUpdated={handleRoleUpdated} />} />
+                    <Route path="/:rolePara/:userId/roles/add" element={<AddRole/>}/>
+                    {/*<Route path="/roles/add" element={<AddRole onRoleAdded={handleRoleAdded} />} />*/}
+                    {/*<Route path="/roles/delete/:id" element={<DeleteRole onRoleDeleted={handleRoleDeleted} />} />*/}
+                    {/*<Route path="/roles/detail/:id" element={<RoleDetail />} />*/}
+                    {/*<Route path="/roles/edit/:id" element={<RoleEdit onRoleUpdated={handleRoleUpdated} />} />*/}
                 </Routes>
             </div>
         );

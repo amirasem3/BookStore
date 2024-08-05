@@ -115,7 +115,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Navigate to="/bookstore" />} />
                     <Route path="/bookstore" element={<LoginUser />} />
-                    <Route path="bookstore/:role/:userId" element={<MainPageAdmin />} />
+                    <Route path="/bookstore/:role/:userId/*" element={<MainPageAdmin />} />
                     <Route path="/:role/:userId/books" element={<BookList />} />
                     <Route path="/:role/:userId/users" element={<UserList/>}/>
                     <Route path="/:rolePara/:userId/roles" element={<RoleList/>}/>
@@ -129,7 +129,7 @@ const App = () => {
                     <Route path="/:role/users/:userId/detail/:id" element={<DetailUser/>}/>
                     <Route path="/:role/users/addUserBook/:id" element={<UserBookList />}/>
                     <Route path="/:role/users/library/remove" element={<EditUserLibrary/>}/>
-                    <Route path="/:rolePara/:userId/roles/add" element={<AddRole />}/>
+                    <Route path="/:rolePara/:userId/roles/add" element={<AddRole/>}/>
                     <Route path="/:rolePara/:userId/roles/delete/:id" element={<DeleteRole />}/>
                     <Route path="/:rolePara/:userId/roles/detail/:id" element={<RoleDetail/>}/>
                     <Route path="/:rolePara/:userId/roles/edit/:id" element={<RoleEdit />}/>
