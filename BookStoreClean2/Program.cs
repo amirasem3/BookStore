@@ -67,7 +67,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         builder =>
         {
-            builder.WithOrigins("http://localhost:3000", "https://ahasemyosuefi.ir")
+            builder.WithOrigins("http://localhost:3000", "https://ahasemyosuefi.ir", "https://ahasemyousefi.ir")
                 .AllowAnyHeader()
                 .AllowCredentials()
                 .AllowAnyMethod();
