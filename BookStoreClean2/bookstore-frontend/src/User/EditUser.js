@@ -14,9 +14,9 @@ const EditUser = () => {
     const [roleName, setRoleName] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
     const [userBooks, setUserBooks] = useState([]);
     const token = localStorage.getItem('token');
+    const user  = JSON.parse(localStorage.getItem('user')); 
 
     useEffect(() => {
         axios.get(`https://bookstoreclean.liara.run/api/users/GetUserById/${id}`,{
@@ -129,7 +129,7 @@ const EditUser = () => {
                 </div>
                 <button onClick={() => navigate(`/${roleName}/users/addUserBook/${id}`)}>Add Books</button>
                 <button type="submit">Update User</button>
-                <button onClick={() => navigate(`/${roleName}/${id}/users`)}>Cancel</button>
+                <button onClick={() => navigate(`/${user.roleName}/${user.id}/users`)}>Cancel</button>
             </form>
         </div>
     );

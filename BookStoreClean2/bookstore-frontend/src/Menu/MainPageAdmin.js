@@ -128,26 +128,7 @@ const MainPageAdmin = () => {
                 <Link to={`/${role}/${userId}/roles`}>Roles</Link>
                 <br />
                 <button onClick={handleLogout}>Logout</button>
-                <Routes>
-                    {/*<Route path="/:role/:userId/books" element={<BookList booksList={books} />} />*/}
-                    <Route path="/users" element={<UserList users={users} />} />
-                    <Route path="/roles" element={<RoleList roles={roles} />} />
-                    <Route path="/books/add" element={<AddBook onBookAdded={handleBookAdded} />} />
-                    <Route path="/books/edit/:id" element={<EditBook onBookUpdated={handleBookUpdated} />} />
-                    <Route path="/books/delete/:id" element={<DeleteBook onBookDeleted={handleBookDeleted} />} />
-                    <Route path="/books/detail/:id" element={<DetailBook />} />
-                    <Route path="/users/add" element={<AddUser onUserAdded={handleUserAdded} roles={roles} />} />
-                    <Route path="/users/edit/:id" element={<EditUser onUserUpdated={handleUserUpdated} />} />
-                    <Route path="/users/delete/:id" element={<DeleteUser onUserDeleted={handleUserDeleted} />} />
-                    <Route path="/users/:userId/detail/:id" element={<DetailUser />} />
-                    <Route path="/users/addUserBook/:id" element={<UserBookList booksList={books} onUserLibraryUpdated={handleUserUpdated} />} />
-                    <Route path="/users/library/remove" element={<EditUserLibrary />} />
-                    <Route path="/:rolePara/:userId/roles/add" element={<AddRole/>}/>
-                    {/*<Route path="/roles/add" element={<AddRole onRoleAdded={handleRoleAdded} />} />*/}
-                    {/*<Route path="/roles/delete/:id" element={<DeleteRole onRoleDeleted={handleRoleDeleted} />} />*/}
-                    {/*<Route path="/roles/detail/:id" element={<RoleDetail />} />*/}
-                    {/*<Route path="/roles/edit/:id" element={<RoleEdit onRoleUpdated={handleRoleUpdated} />} />*/}
-                </Routes>
+             
             </div>
         );
     }
@@ -163,25 +144,7 @@ const MainPageAdmin = () => {
                 <Link to={`/${role}/users/${userId}/detail/${userId}`}>Profile</Link>
                 <br/>
                 <button onClick={handleLogout}>Logout</button>
-                <Routes>
-                    {/*<Route path="/:role/:userId/books" element={<BookList booksList={books} />} />*/}
-                    <Route path="/users" element={<UserList users={users}/>}/>
-                    <Route path="/roles" element={<RoleList roles={roles}/>}/>
-                    <Route path="/books/add" element={<AddBook onBookAdded={handleBookAdded}/>}/>
-                    <Route path="/books/edit/:id" element={<EditBook onBookUpdated={handleBookUpdated}/>}/>
-                    <Route path="/books/delete/:id" element={<DeleteBook onBookDeleted={handleBookDeleted}/>}/>
-                    <Route path="/books/detail/:id" element={<DetailBook/>}/>
-                    <Route path="/users/add" element={<AddUser onUserAdded={handleUserAdded} roles={roles}/>}/>
-                    <Route path="/users/edit/:id" element={<EditUser onUserUpdated={handleUserUpdated}/>}/>
-                    <Route path="/users/delete/:id" element={<DeleteUser onUserDeleted={handleUserDeleted}/>}/>
-                    <Route path="/users/:userId/detail/:id" element={<DetailUser/>}/>
-                    <Route path="/users/addUserBook/:id" element={<UserBookList booksList={books} onUserLibraryUpdated={handleUserUpdated}/>}/>
-                    <Route path="/users/library/remove" element={<EditUserLibrary/>}/>
-                    <Route path="/roles/add" element={<AddRole onRoleAdded={handleRoleAdded}/>}/>
-                    <Route path="/roles/delete/:id" element={<DeleteRole onRoleDeleted={handleRoleDeleted}/>}/>
-                    <Route path="/roles/detail/:id" element={<RoleDetail/>}/>
-                    <Route path="/roles/edit/:id" element={<RoleEdit onRoleUpdated={handleRoleUpdated}/>}/>
-                </Routes>
+               
             </div>
         );
     }
