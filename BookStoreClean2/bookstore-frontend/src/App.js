@@ -1,13 +1,11 @@
 // src/App.js
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import BookList from './Book/BookList';
 import AddBook from './Book/AddBook';
 import EditBook from './Book/EditBook';
 import DeleteBook from './Book/DeleteBook';
 import DetailBook from "./Book/DetailBook";
-// import SearchBooks from "./Book/SearchBooks";
 import UserList from "./User/UserList";
 import AddUser from "./User/AddUser";
 import LoginUser from "./User/LoginUser";

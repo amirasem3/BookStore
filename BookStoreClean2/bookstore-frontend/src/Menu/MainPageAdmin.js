@@ -111,10 +111,7 @@ const MainPageAdmin = () => {
         localStorage.removeItem('books');
         navigate(`/bookstore`)
     }
-
-    // if (!role || !role.includes("Admin")) {
-    //     return <Navigate to="/bookstore" />;
-    // }
+    
     
     if(role.includes("Admin")){
         return (
